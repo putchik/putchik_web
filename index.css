@@ -10,7 +10,8 @@
     src: url("./assets/fonts/Montserrat-Regular.ttf");
 }
 
-html, body {
+html,
+body {
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;

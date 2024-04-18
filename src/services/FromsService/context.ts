@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react'; 
-import { OnSubmitEnd, OnSubmitFailure, OnSubmitSuccess, Submit } from './types';
+import { createContext, useContext } from "react";
+import { OnSubmitEnd, OnSubmitFailure, OnSubmitSuccess, Submit } from "./types";
 
 export type FormContextType = {
     formId: string;
@@ -15,7 +15,7 @@ export const useFormContext = () => {
     const context = useContext(FormContext);
 
     if (!context) {
-        throw new Error('useFormContext must be used within a FormContext');
+        throw new Error("useFormContext must be used within a FormContext");
     }
 
     return context;

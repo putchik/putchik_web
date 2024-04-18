@@ -1,7 +1,5 @@
 const Submitter = () => {
-    return (
-        <div></div>
-    );
+    return <div></div>;
 };
 
 export default Submitter;

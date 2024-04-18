@@ -1,7 +1,5 @@
 const EmailField = () => {
-    return (
-        <div></div>
-    );
+    return <div></div>;
 };
 
 export default EmailField;

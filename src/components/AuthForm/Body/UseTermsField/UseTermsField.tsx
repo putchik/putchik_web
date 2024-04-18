@@ -1,7 +1,5 @@
 const UseTermsField = () => {
-    return (
-        <div></div>
-    );
+    return <div></div>;
 };
 
 export default UseTermsField;

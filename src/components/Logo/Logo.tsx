@@ -7,9 +7,7 @@ import logoFull from "./../../assets/images/logoFull.svg";
 import styles from "./Logo.module.css";
 import cn from "classnames";
 
-const Logo = ({
-    navigateToHome=false,
-}: LogoProps) => {
+const Logo = ({ navigateToHome = false }: LogoProps) => {
     const navigate = useNavigate();
 
     const handleLogoClick = () => {

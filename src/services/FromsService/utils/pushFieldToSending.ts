@@ -8,24 +8,20 @@ export const pushFieldToSending: PushFieldToSending = ({
     error,
     submitOptions,
 }) => {
-    const {
-        formId,
-        submit,
-        onSubmitFailure,
-        onSubmitSuccess,
-        onSubmitEnd
-    } = formContext;
-    
+    const { formId, submit, onSubmitFailure, onSubmitSuccess, onSubmitEnd } =
+        formContext;
+
     const form = FormsService.getInstance().getForm(formId);
-    
-    form.fieldsCount =
-        document.querySelectorAll(`[data-formId="${formId}"]`).length;
+
+    form.fieldsCount = document.querySelectorAll(
+        `[data-formId="${formId}"]`
+    ).length;
     form.fields.set(fieldId, value);
-    
+
     if (!!error) {
         form.error = true;
     }
-    
+
     form.readyFieldsCount++;
 
     if (form.readyFieldsCount < form.fieldsCount) {
@@ -40,7 +36,7 @@ export const pushFieldToSending: PushFieldToSending = ({
     }
 
     submit(form.fields, submitOptions)
-    .then(onSubmitSuccess)
-    .catch(onSubmitFailure)
-    .finally(onSubmitEnd)
+        .then(onSubmitSuccess)
+        .catch(onSubmitFailure)
+        .finally(onSubmitEnd);
 };

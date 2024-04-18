@@ -12,9 +12,7 @@ const NotFoundPage = () => {
 
     return (
         <div className={styles.wrapper}>
-            <button
-                onClick={handleBackButtonClick}
-            >Назад</button>
+            <button onClick={handleBackButtonClick}>Назад</button>
             <div>404 Not Found</div>
         </div>
     );

@@ -8,11 +8,11 @@ export class FormsService {
         if (!FormsService._instance) {
             FormsService._instance = new FormsService();
         }
-        
+
         return FormsService._instance;
     }
 
-    constructor () {
+    constructor() {
         if (FormsService._instance) {
             return FormsService._instance;
         }
