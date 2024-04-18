@@ -1,5 +1,7 @@
+import Button from "../../UI/Button/Button";
+
 const Submitter = () => {
-    return <div></div>;
+    return <Button>Далее</Button>;
 };
 
 export default Submitter;

@@ -1,5 +1,11 @@
+import TextInput from "../../../UI/TextInput/TextInput";
+
 const EmailField = () => {
-    return <div></div>;
+    return (
+        <div>
+            <TextInput value="" id="" />
+        </div>
+    );
 };
 
 export default EmailField;

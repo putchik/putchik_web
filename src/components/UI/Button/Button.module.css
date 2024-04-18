@@ -1,13 +1,12 @@
 .button {
-    border-radius: .5rem;
-    padding: .5rem;
-
     --red-color: #D80034;
 
     transition: all .2s;
 }
 
 .background_red {
+    border-radius: .5rem;
+    padding: .5rem;
     border: .2rem solid var(--red-color);
     background: var(--red-color);
     color: white;
@@ -20,6 +19,7 @@
 }
 
 .text_red {
+    padding: 0;
     color: var(--red-color);
     background: none;
 }

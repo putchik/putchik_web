@@ -1,0 +1,7 @@
+.input {
+    --red-color: #D80034;
+    border: .2rem solid var(--red-color);
+    border-radius: .5rem;
+    padding: .5rem;
+    width: 100%;
+}

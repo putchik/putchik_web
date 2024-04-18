@@ -10,9 +10,8 @@ const Body = () => {
         <div className={styles.wrapper}>
             <EmailField />
             <Submitter />
-            <Button>Далее</Button>
-            <UseTermsField />
             <Button buttonTheme="text_red">Войти по почте</Button>
+            <UseTermsField />
         </div>
     );
 };
