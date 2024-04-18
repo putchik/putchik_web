@@ -3,20 +3,17 @@
     padding: 0;
     border: none;
     box-sizing: border-box;
-}
-
-@font-face {
-    font-family: "Montserrat";
-    src: url("./assets/fonts/Montserrat-Regular.ttf");
+    text-decoration: none;
 }
 
 html,
 body {
+    position: relative;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
     font-size: 12px;
-    font-family: "Montserrat";
+    font-family: "Arial";
 }
 
 #root {

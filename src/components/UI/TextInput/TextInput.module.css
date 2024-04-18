@@ -1,7 +1,13 @@
+@import url("./../../../theme.css");
+
 .input {
-    --red-color: #D80034;
-    border: .2rem solid var(--red-color);
+    outline: none;
+    border: .2rem solid var(--red);
     border-radius: .5rem;
     padding: .5rem;
     width: 100%;
+}
+
+.input:focus {
+    border: .2rem solid var(--red-dark);
 }
