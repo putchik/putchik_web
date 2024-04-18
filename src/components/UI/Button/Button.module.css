@@ -1,0 +1,30 @@
+.button {
+    border-radius: .5rem;
+    padding: .5rem;
+
+    --red-color: #D80034;
+
+    transition: all .2s;
+}
+
+.background_red {
+    border: .2rem solid var(--red-color);
+    background: var(--red-color);
+    color: white;
+}
+
+.background_red:hover {
+    background: white;
+    color: var(--red-color);
+    cursor: pointer;
+}
+
+.text_red {
+    color: var(--red-color);
+    background: none;
+}
+
+.text_red:hover {
+    color: black;
+    cursor: pointer;
+}
