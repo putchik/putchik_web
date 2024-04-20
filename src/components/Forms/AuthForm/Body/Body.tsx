@@ -1,8 +1,8 @@
-import Button from "../../UI/Button/Button";
+import Button from "../../../UI/Button/Button";
 import Submitter from "../Submitter/Submitter";
-import EmailField from "./EmailField/EmailField";
-import UseTermsField from "./UseTermsField/UseTermsField";
-import PhoneNumberField from "./PhoneNumberField/PhoneNumberField";
+import EmailField from "../../FormFields/EmailField/EmailField";
+import UseTermsField from "../../FormFields/UseTermsField/UseTermsField";
+import PhoneNumberField from "../../FormFields/PhoneNumberField/PhoneNumberField";
 
 import styles from "./Body.module.css";
 import { useState } from "react";

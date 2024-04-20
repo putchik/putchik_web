@@ -1,4 +1,4 @@
-import AuthForm from "../../components/AuthForm/AuthForm";
+import AuthForm from "../../components/Forms/AuthForm/AuthForm";
 import Logo from "../../components/Logo/Logo";
 import styles from "./AuthPage.module.css";
 
