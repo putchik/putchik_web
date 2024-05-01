@@ -10,24 +10,24 @@ const FormField = ({ children }: FormFieldProps) => {
     const { revalidate, value, fieldId } = useFormFieldContext();
 
     useEffect(() => {
-        const onSubmitStart = () => {
+        const onSubmitStart = async () => {
             pushFieldToSubmit({
                 fieldId,
-                error: revalidate(),
+                error: await revalidate(),
                 value,
             });
         };
 
-        document.addEventListener(`submit-start-${formId}`, onSubmitStart);
+        document.addEventListener(`start-${formId}-submit`, onSubmitStart);
 
         return () => {
             document.removeEventListener(
-                `submit-start-${formId}`,
+                `start-${formId}-submit`,
                 onSubmitStart
             );
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [revalidate]);
 
     return <div>{children}</div>;
 };

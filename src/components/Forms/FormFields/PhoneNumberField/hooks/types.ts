@@ -14,7 +14,8 @@ export type UsePhoneNumberFieldResult = {
 
 export type UsePhoneNumberField = () => UsePhoneNumberFieldResult;
 
-export type PhoneNumberFieldRevalidate = () => PhoneNumberFieldValidationResult;
+export type PhoneNumberFieldRevalidate =
+    () => Promise<PhoneNumberFieldValidationResult>;
 
 export type PhoneNumberFieldSubmitEvent = CustomEvent<{
     formId: string;

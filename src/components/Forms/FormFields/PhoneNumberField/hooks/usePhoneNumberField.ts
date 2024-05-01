@@ -11,7 +11,7 @@ export const usePhoneNumberField: UsePhoneNumberField = () => {
     const [value, setValue] = useState<PhoneNumberFieldValue>(defaultValue);
     const [error, setError] = useState<PhoneNumberFieldValidationResult>(null);
 
-    const revalidate = useCallback(() => {
+    const revalidate = useCallback(async () => {
         return validateAndSetError(value);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);

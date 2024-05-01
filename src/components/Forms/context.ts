@@ -1,9 +1,10 @@
+import { PushFieldToSubmit, StartFormSubmit } from './Form/types';
 import { createContext, useContext } from "react";
-import { PushFieldToSubmit } from "./types";
 
 type FormContextType = {
     formId: string;
     pushFieldToSubmit: PushFieldToSubmit;
+    startFormSubmit: StartFormSubmit;
 };
 
 export const FormContext = createContext<null | FormContextType>(null);

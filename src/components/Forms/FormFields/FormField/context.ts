@@ -4,7 +4,7 @@ type FormFieldContextType = {
     fieldId: string;
     value: unknown;
     error: unknown;
-    revalidate: () => unknown;
+    revalidate: () => Promise<unknown>;
 };
 
 export const FormFieldContext = createContext<null | FormFieldContextType>(
