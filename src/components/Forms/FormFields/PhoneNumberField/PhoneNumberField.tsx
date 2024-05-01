@@ -8,12 +8,7 @@ import { FormFieldContext } from "../FormField/context";
 const fieldId = "phoneNumber";
 
 const PhoneNumberField = () => {
-    const {
-        handleChange,
-        revalidate,
-        error,
-        value,
-    } = usePhoneNumberField();
+    const { handleChange, revalidate, error, value } = usePhoneNumberField();
 
     return (
         <FormFieldContext.Provider

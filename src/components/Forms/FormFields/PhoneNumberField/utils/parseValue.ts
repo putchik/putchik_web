@@ -29,6 +29,6 @@ export const parseValue = (value: PhoneNumberFieldValue) => {
     }
 
     return defaultValue + goodString;
-}
+};
 
 export const defaultValue = "+7 ";

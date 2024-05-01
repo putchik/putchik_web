@@ -1,5 +1,9 @@
 import { useCallback, useState } from "react";
-import { PhoneNumberFieldValue, UsePhoneNumberField, PhoneNumberFieldValidationResult } from "./types";
+import {
+    PhoneNumberFieldValue,
+    UsePhoneNumberField,
+    PhoneNumberFieldValidationResult,
+} from "./types";
 import { validate } from "../utils/validate";
 import { defaultValue, parseValue } from "../utils/parseValue";
 

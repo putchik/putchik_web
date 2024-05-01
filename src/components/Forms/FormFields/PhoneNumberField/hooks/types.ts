@@ -2,14 +2,14 @@ import { PhoneNumberFieldValidationError as PhoneNumberFieldValidationError } fr
 
 export type PhoneNumberFieldValue = string;
 
-export type PhoneNumberFieldValidationResult = PhoneNumberFieldValidationError | null;
+export type PhoneNumberFieldValidationResult =
+    PhoneNumberFieldValidationError | null;
 
 export type UsePhoneNumberFieldResult = {
     revalidate: PhoneNumberFieldRevalidate;
     value: PhoneNumberFieldValue;
     error: PhoneNumberFieldValidationResult;
     handleChange: (value: PhoneNumberFieldValue) => void;
-
 };
 
 export type UsePhoneNumberField = () => UsePhoneNumberFieldResult;

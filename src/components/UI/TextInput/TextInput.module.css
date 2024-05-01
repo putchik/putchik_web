@@ -2,12 +2,12 @@
 
 .input {
     outline: none;
-    border: .2rem solid var(--red);
-    border-radius: .5rem;
-    padding: .5rem;
+    border: 0.2rem solid var(--red);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
     width: 100%;
 }
 
 .input:focus {
-    border: .2rem solid var(--red-dark);
+    border: 0.2rem solid var(--red-dark);
 }

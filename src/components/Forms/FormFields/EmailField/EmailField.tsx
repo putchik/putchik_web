@@ -3,12 +3,7 @@ import TextInput from "../../../UI/TextInput/TextInput";
 const EmailField = () => {
     return (
         <div>
-            <TextInput
-                handleChange={() => {}}
-                value=""
-                id="email"
-                autoFocus
-            />
+            <TextInput handleChange={() => {}} value="" id="email" autoFocus />
         </div>
     );
 };

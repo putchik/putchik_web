@@ -7,14 +7,18 @@ type FormFieldContextType = {
     revalidate: () => unknown;
 };
 
-export const FormFieldContext = createContext<null | FormFieldContextType>(null);
+export const FormFieldContext = createContext<null | FormFieldContextType>(
+    null
+);
 
 export const useFormFieldContext = () => {
     const context = useContext(FormFieldContext);
 
     if (!context) {
-        throw new Error("useFormFieldContext must be called within FormFieldContext.");
+        throw new Error(
+            "useFormFieldContext must be called within FormFieldContext."
+        );
     }
 
     return context;
-}
+};

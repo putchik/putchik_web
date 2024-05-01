@@ -1,13 +1,13 @@
 @import url("./../../../theme.css");
 
 .button {
-    transition: all .2s;
+    transition: all 0.2s;
 }
 
 .background_red {
-    border-radius: .5rem;
-    padding: .5rem;
-    border: .2rem solid var(--red);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 0.2rem solid var(--red);
     background: var(--red);
     color: white;
 }

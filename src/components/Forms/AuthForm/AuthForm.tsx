@@ -1,10 +1,18 @@
+import { FormContext } from "../context";
 import Body from "./Body/Body";
 
 const AuthForm = () => {
     return (
-        <form>
-            <Body />
-        </form>
+        <FormContext.Provider
+            value={{
+                pushFieldToSubmit: ,
+                formId: "authForm",
+            }}
+        >
+            <form>
+                <Body />
+            </form>
+        </FormContext.Provider>
     );
 };
 

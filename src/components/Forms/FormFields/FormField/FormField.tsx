@@ -5,11 +5,9 @@ import { useFormFieldContext } from "./context";
 
 import { FormFieldProps } from "./types";
 
-const FormField = ({
-    children
-}: FormFieldProps) => {
-    const {formId, pushFieldToSubmit} = useFormContext();
-    const {revalidate, value, fieldId} = useFormFieldContext();
+const FormField = ({ children }: FormFieldProps) => {
+    const { formId, pushFieldToSubmit } = useFormContext();
+    const { revalidate, value, fieldId } = useFormFieldContext();
 
     useEffect(() => {
         const onSubmitStart = () => {
@@ -20,10 +18,7 @@ const FormField = ({
             });
         };
 
-        document.addEventListener(
-            `submit-start-${formId}`,
-            onSubmitStart
-        );
+        document.addEventListener(`submit-start-${formId}`, onSubmitStart);
 
         return () => {
             document.removeEventListener(
@@ -32,12 +27,8 @@ const FormField = ({
             );
         };
     }, []);
-    
-    return (
-        <div>
-            {children}
-        </div>
-    );
+
+    return <div>{children}</div>;
 };
 
 export default FormField;
