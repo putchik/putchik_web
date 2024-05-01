@@ -33,6 +33,7 @@ export const useForm: UseForm = ({
 
     const pushFieldToSubmit = (field: FormField) => {
         fieldValues[field.fieldId] = field.value;
+
         console.log(field);
 
         if (!Object.is(field.error, null)) {

@@ -14,6 +14,7 @@ export const useAuthForm = (): UseFormResult => {
         formId: "authForm",
         fieldValues: {
             phoneNumber: "+7 ",
+            useTermsField: false,
         },
         onFormSubmitStart,
     });
