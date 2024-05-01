@@ -5,6 +5,8 @@ import { useFormFieldContext } from "./context";
 
 import { FormFieldProps } from "./types";
 
+import styles from "./FormField.module.css";
+
 const FormField = ({ children }: FormFieldProps) => {
     const { formId, pushFieldToSubmit } = useFormContext();
     const { revalidate, value, fieldId } = useFormFieldContext();
@@ -29,7 +31,7 @@ const FormField = ({ children }: FormFieldProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [revalidate]);
 
-    return <div>{children}</div>;
+    return <div className={styles.wrapper} id={fieldId}>{children}</div>;
 };
 
 export default FormField;

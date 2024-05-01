@@ -1,3 +1,4 @@
+import Form from "../Form/Form";
 import { FormContext } from "../context";
 
 import Body from "./Body/Body";
@@ -18,9 +19,9 @@ const AuthForm = () => {
                 formId,
             }}
         >
-            <form>
+            <Form>
                 <Body />
-            </form>
+            </Form>
         </FormContext.Provider>
     );
 };

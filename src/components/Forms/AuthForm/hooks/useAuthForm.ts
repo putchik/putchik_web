@@ -1,5 +1,5 @@
 import { useForm } from "../../Form/hooks/useForm";
-import { OnFormSubmitStart, UseFormResult } from "../../Form/types";
+import { OnFormSubmitStart, UseFormResult } from "../../Form/hooks/types";
 
 export const useAuthForm = (): UseFormResult => {
     const onFormSubmitStart: OnFormSubmitStart = () => {

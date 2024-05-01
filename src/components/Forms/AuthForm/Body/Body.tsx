@@ -19,7 +19,7 @@ const Body = () => {
             {isAuthByEmail && <EmailField />}
             {!isAuthByEmail && <PhoneNumberField />}
             <Submitter />
-            <Button buttonTheme="text_red" onClick={handleSwapButtonClick}>
+            <Button type="button" buttonTheme="text_red" onClick={handleSwapButtonClick}>
                 {!isAuthByEmail ? "Войти по почте" : "Войти по номеру"}
             </Button>
             <UseTermsField />

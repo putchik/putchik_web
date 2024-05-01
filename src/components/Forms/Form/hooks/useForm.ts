@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { UseForm } from "../types"
+import { UseForm } from "./types"
 import { FormField } from "../../FormFields/FormField/types";
 
 import { FormSubmitEvent } from "../utils";
