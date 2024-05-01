@@ -5,7 +5,7 @@ const AuthForm = () => {
     return (
         <FormContext.Provider
             value={{
-                pushFieldToSubmit: ,
+                pushFieldToSubmit: () => {},
                 formId: "authForm",
             }}
         >
