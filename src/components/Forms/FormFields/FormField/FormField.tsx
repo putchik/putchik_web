@@ -26,6 +26,7 @@ const FormField = ({ children }: FormFieldProps) => {
                 onSubmitStart
             );
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return <div>{children}</div>;

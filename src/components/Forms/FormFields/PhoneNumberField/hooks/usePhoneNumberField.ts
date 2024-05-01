@@ -13,6 +13,7 @@ export const usePhoneNumberField: UsePhoneNumberField = () => {
 
     const revalidate = useCallback(() => {
         return validateAndSetError(value);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);
 
     const validateAndSetError = useCallback((val: PhoneNumberFieldValue) => {
