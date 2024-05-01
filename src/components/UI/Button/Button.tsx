@@ -6,12 +6,13 @@ import { ButtonProps } from "./types";
 const Button = ({
     children,
     buttonTheme = "background_red",
+    classes = [],
     ...props
 }: ButtonProps) => {
     return (
         <button
             type="button"
-            className={cn(styles.button, styles[buttonTheme])}
+            className={cn(styles.button, styles[buttonTheme], ...classes)}
             {...props}
         >
             {children}
