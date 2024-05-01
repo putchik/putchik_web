@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
-import { PhoneNumberFieldValue, UsePhoneNumberField, ValidationResult } from "./types";
+import { PhoneNumberFieldValue, UsePhoneNumberField, PhoneNumberFieldValidationResult } from "./types";
 import { validate } from "../utils/validate";
 import { defaultValue, parseValue } from "../utils/parseValue";
 
 export const usePhoneNumberField: UsePhoneNumberField = () => {
     const [value, setValue] = useState<PhoneNumberFieldValue>(defaultValue);
-    const [error, setError] = useState<ValidationResult>(null);
+    const [error, setError] = useState<PhoneNumberFieldValidationResult>(null);
 
     const revalidate = useCallback(() => {
         return validateAndSetError(value);

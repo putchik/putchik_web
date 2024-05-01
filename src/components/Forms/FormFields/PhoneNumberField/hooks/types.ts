@@ -1,17 +1,26 @@
-import { ValidationError } from "../utils/validate";
+import { PhoneNumberFieldValidationError as PhoneNumberFieldValidationError } from "../utils/validate";
 
 export type PhoneNumberFieldValue = string;
 
-export type ValidationResult = ValidationError | null;
+export type PhoneNumberFieldValidationResult = PhoneNumberFieldValidationError | null;
 
 export type UsePhoneNumberFieldResult = {
-    revalidate: Revalidate;
+    revalidate: PhoneNumberFieldRevalidate;
     value: PhoneNumberFieldValue;
-    error: ValidationResult;
+    error: PhoneNumberFieldValidationResult;
     handleChange: (value: PhoneNumberFieldValue) => void;
 
 };
 
 export type UsePhoneNumberField = () => UsePhoneNumberFieldResult;
 
-export type Revalidate = () => ValidationResult;
+export type PhoneNumberFieldRevalidate = () => PhoneNumberFieldValidationResult;
+
+export type PhoneNumberFieldSubmitEvent = CustomEvent<{
+    formId: string;
+}>;
+
+export type PhoneNumberFieldPushEvent = CustomEvent<{
+    value: PhoneNumberFieldValue;
+    error: PhoneNumberFieldValidationResult;
+}>;
