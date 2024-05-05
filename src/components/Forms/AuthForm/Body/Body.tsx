@@ -1,4 +1,4 @@
-import Button from "../../../UI/Button/Button";
+import Button from "../../../UI/Buttons/Button/Button";
 import Submitter from "../Submitter/Submitter";
 import EmailField from "../../FormFields/EmailField/EmailField";
 import UseTermsField from "../../FormFields/UseTermsField/UseTermsField";
@@ -19,7 +19,11 @@ const Body = () => {
             {isAuthByEmail && <EmailField />}
             {!isAuthByEmail && <PhoneNumberField />}
             <Submitter />
-            <Button type="button" buttonTheme="text_red" onClick={handleSwapButtonClick}>
+            <Button
+                type="button"
+                buttonTheme="text_red"
+                onClick={handleSwapButtonClick}
+            >
                 {!isAuthByEmail ? "Войти по почте" : "Войти по номеру"}
             </Button>
             <UseTermsField />

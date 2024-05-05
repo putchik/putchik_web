@@ -1,10 +1,10 @@
-import Button from "../../../UI/Button/Button";
+import Button from "../../../UI/Buttons/Button/Button";
 import { useFormContext } from "../../context";
 
 import styles from "./Submitter.module.css";
 
 const Submitter = () => {
-    const {startFormSubmit} = useFormContext();
+    const { startFormSubmit } = useFormContext();
 
     return (
         <Button
