@@ -1,12 +1,13 @@
-import Logo from "../../components/Logo/Logo";
-import BackButton from "../../components/UI/Buttons/BackButton/BackButton";
+import BackHeader from "./components/BackHeader/BackHeader";
+import Body from "./components/Body/Body";
+
+import styles from "./CodePage.module.css";
 
 const CodePage = () => {
     return (
-        <div>
-            <BackButton />
-            <Logo />
-            Code Page
+        <div className={styles.wrapper}>
+            <BackHeader />
+            <Body />
         </div>
     );
 };
