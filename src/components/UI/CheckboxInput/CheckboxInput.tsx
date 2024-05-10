@@ -6,7 +6,7 @@ const CheckboxInput = ({
     handleChange,
     label,
     checked,
-    id
+    id,
 }: CheckboxInputProps) => {
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         handleChange(event.target.checked);

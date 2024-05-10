@@ -31,7 +31,11 @@ const FormField = ({ children }: FormFieldProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [revalidate]);
 
-    return <div className={styles.wrapper} id={fieldId}>{children}</div>;
+    return (
+        <div className={styles.wrapper} id={fieldId}>
+            {children}
+        </div>
+    );
 };
 
 export default FormField;

@@ -20,16 +20,19 @@ const PhoneNumberField = () => {
                 error,
                 fieldId,
             }}
-        >   
+        >
             <FormField>
-                <FormFieldLabel label="Введите номер телефона" fieldId={fieldId} />
+                <FormFieldLabel
+                    label="Введите номер телефона"
+                    fieldId={fieldId}
+                />
                 <TextInput
                     handleChange={handleChange}
                     value={value}
                     id={fieldId + "Input"}
                     autoFocus
                 />
-                <FormFieldError error={error}/>
+                <FormFieldError error={error} />
             </FormField>
         </FormFieldContext.Provider>
     );

@@ -11,7 +11,7 @@ const LoaderPage = () => {
 
     return (
         <div className={styles.wrapper}>
-            <Loader message={state?.message}/>
+            <Loader message={state?.message} />
         </div>
     );
 };

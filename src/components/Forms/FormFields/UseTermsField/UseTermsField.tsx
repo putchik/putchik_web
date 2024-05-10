@@ -6,7 +6,7 @@ import { useUseTermsField } from "./hooks/useUseTermsField";
 const fieldId = "useTerms";
 
 const UseTermsField = () => {
-    const {handleChange, revalidate, error, value} = useUseTermsField();
+    const { handleChange, revalidate, error, value } = useUseTermsField();
 
     return (
         <FormFieldContext.Provider
