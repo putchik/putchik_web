@@ -9,7 +9,7 @@
         "build": "tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
-        "prettier": "npx prettier . --fix"
+        "prettier": "pnpm exec prettier . --write"
     },
     "dependencies": {
         "express": "^4.19.2",
