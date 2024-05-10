@@ -25,5 +25,5 @@ export const router = createBrowserRouter([
     {
         path: LOADER_PAGE,
         element: <LoaderPage />,
-    }
+    },
 ]);

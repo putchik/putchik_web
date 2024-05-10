@@ -5,11 +5,7 @@ import Body from "./Body/Body";
 import { useAuthForm } from "./hooks/useAuthForm";
 
 const AuthForm = () => {
-    const {
-        startFormSubmit,
-        pushFieldToSubmit,
-        formId,
-    } = useAuthForm();
+    const { startFormSubmit, pushFieldToSubmit, formId } = useAuthForm();
 
     return (
         <FormContext.Provider

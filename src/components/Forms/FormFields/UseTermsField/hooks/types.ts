@@ -2,8 +2,7 @@ import { UseTermsFieldValidationError } from "../utils/validate";
 
 export type UseTermsFieldValue = boolean;
 
-export type UseTermsFieldValidationResult =
-    UseTermsFieldValidationError | null;
+export type UseTermsFieldValidationResult = UseTermsFieldValidationError | null;
 
 export type UseTermsFieldResult = {
     revalidate: UseTermsFieldRevalidate;

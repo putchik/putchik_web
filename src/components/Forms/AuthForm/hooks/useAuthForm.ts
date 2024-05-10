@@ -1,11 +1,15 @@
 import { useForm } from "../../Form/hooks/useForm";
-import { OnFormSubmitEnd, OnFormSubmitStart, UseFormResult } from "../../Form/hooks/types";
+import {
+    OnFormSubmitEnd,
+    OnFormSubmitStart,
+    UseFormResult,
+} from "../../Form/hooks/types";
 import { useNavigate } from "react-router-dom";
 import { CODE_PAGE } from "../../../../router/paths";
 
 export const useAuthForm = (): UseFormResult => {
     const navigate = useNavigate();
-    
+
     const onFormSubmitStart: OnFormSubmitStart = () => {
         return new Promise((res) => setTimeout(() => res(null), 1000));
     };
@@ -16,11 +20,7 @@ export const useAuthForm = (): UseFormResult => {
         navigate(CODE_PAGE);
     };
 
-    const {
-        startFormSubmit,
-        pushFieldToSubmit,
-        formId,
-    } = useForm({
+    const { startFormSubmit, pushFieldToSubmit, formId } = useForm({
         formId: "authForm",
         fieldValues: {
             phoneNumber: "+7 ",
@@ -34,5 +34,5 @@ export const useAuthForm = (): UseFormResult => {
         startFormSubmit,
         pushFieldToSubmit,
         formId,
-    }
-}
+    };
+};

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { UseForm } from "./types"
+import { UseForm } from "./types";
 import { FormField } from "../../FormFields/FormField/types";
 
 import { FormSubmitEvent } from "../utils";
@@ -17,7 +17,7 @@ export const useForm: UseForm = ({
     onFormSubmitEnd,
 }) => {
     const navigate = useNavigate();
-    
+
     const submitStartEvent = new FormSubmitEvent();
     const submitSuccessEvent = new FormSubmitEvent();
     const submitFailureEvent = new FormSubmitEvent();
@@ -56,10 +56,10 @@ export const useForm: UseForm = ({
         _onFormSubmitStart(fieldValues);
     };
 
-    const _onFormSubmitStart = (fieldValues: {[key: string]: unknown}) => {
+    const _onFormSubmitStart = (fieldValues: { [key: string]: unknown }) => {
         onFormSubmitStart(fieldValues, submitStartEvent)
-            .then(result => _onFormSubmitSuccess(result))
-            .catch(error => _onFormSubmitFailure(error))
+            .then((result) => _onFormSubmitSuccess(result))
+            .catch((error) => _onFormSubmitFailure(error))
             .finally(_onFormSubmitEnd);
 
         if (submitStartEvent.defaultPrevented) {
@@ -69,10 +69,10 @@ export const useForm: UseForm = ({
         navigate(LOADER_PAGE, {
             state: {
                 message: "Отправляем данные на сервер...",
-            }
+            },
         });
     };
-    
+
     const _onFormSubmitSuccess = (result: unknown) => {
         onFormSubmitSuccess && onFormSubmitSuccess(result, submitSuccessEvent);
 
@@ -103,5 +103,5 @@ export const useForm: UseForm = ({
         startFormSubmit,
         pushFieldToSubmit,
         formId,
-    }
+    };
 };

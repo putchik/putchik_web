@@ -1,3 +1,5 @@
-export type LoaderPageState = undefined | {
-    message: string | undefined;
-}
+export type LoaderPageState =
+    | undefined
+    | {
+          message: string | undefined;
+      };
