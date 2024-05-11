@@ -11,7 +11,7 @@
         "preview": "vite preview",
         "prettier": "pnpm exec prettier --write",
         "lint-staged": "lint-staged",
-        "prepare": "husky"
+        "husky": "husky"
     },
     "dependencies": {
         "express": "^4.19.2",
