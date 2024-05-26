@@ -11,6 +11,7 @@ const fieldId = "email";
 
 const EmailField = () => {
     const { handleChange, revalidate, error, value } = useEmailField();
+
     return (
         <FormFieldContext.Provider
             value={{
@@ -31,9 +32,6 @@ const EmailField = () => {
                 <FormFieldError error={error} />
             </FormField>
         </FormFieldContext.Provider>
-        // <div>
-        //     <TextInput handleChange={() => {}} value="" id="email" autoFocus />
-        // </div>
     );
 };
 
