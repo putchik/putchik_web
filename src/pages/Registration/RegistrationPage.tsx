@@ -8,7 +8,7 @@ import { IAuthFormData } from '../../components/Forms/AuthForm/AuthForm';
 
 
 function RegistrationPage() {
-    const [logInStage, setLogInStage] = useState<TypesOfLogInStage>(3);
+    const [logInStage, setLogInStage] = useState<TypesOfLogInStage>(0);
     const [typeOfInput, setTypeOfInput] = useState<TypesOfLogin>(TypesOfLogin.EMAIL);
 
     const [formData, setFormData] = useState<IAuthFormData>({
