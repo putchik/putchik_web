@@ -19,7 +19,7 @@ export async function fetchPostVerifyOtpSignIn(typeOfLogin: TypesOfLogin, phone:
     const body = JSON.stringify(bodyData);
 
     try {
-        const response = await fetch('http://localhost:8000/api/auth/sign_in/verify_otp', {
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/api/auth/sign_in/verify_otp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

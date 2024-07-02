@@ -2,7 +2,7 @@ import { TypesOfLogin } from "../components/LogInInputTypes";
 
 async function fetchPostSendCode(typeOfLogin: TypesOfLogin, phone: string, email: string) {
     try {
-        const response = await fetch('http://localhost:8000/api/auth/send_code', {
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/api/auth/send_code', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
