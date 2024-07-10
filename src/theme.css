@@ -1,4 +1,28 @@
-* {
-    --red: #d80034;
-    --red-dark: #d0002a;
+:root{
+    --active-red-color: #d80034;
+    --inactive-red-color: #b8002c;
+    --inactive-button-text-color: #dc8096;
+    --inactive-color: #d6d6d6;
+    --inactive-text-color: #898989;
+    --link-color: #2d91c9;
+
+    --border-radius-s: .35rem;
+    --border-radius-m: .83rem;
+    --border-radius-l: 2.5rem;
+
+    --border-stroke: .16rem; 
+
+    --spacing-s: .42rem;
+    --spacing-m: .83rem;
+    --spacing-input: 1.25rem;
+    --spacing-l: 1.67rem;
+    --spacing-xl: 2.5rem;
+    --spacing-2xl: 3.33rem;
+    --spacing-3xl: 4.16rem;
+    --spacing-4xl: 8.33rem;
+
+    --font-size-additional-text: 1rem;
+    --font-size-main-and-input-text: 1.25rem;
+    --font-size-card-text: 2.5rem;
+    --font-size-title-text: 5rem;
 }
