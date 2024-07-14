@@ -14,6 +14,9 @@ importers:
       react:
         specifier: ^18.2.0
         version: 18.2.0
+      react-datalist-input:
+        specifier: ^3.2.1
+        version: 3.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
@@ -1309,6 +1312,12 @@ packages:
   raw-body@2.5.2:
     resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
     engines: {node: '>= 0.8'}
+
+  react-datalist-input@3.2.1:
+    resolution: {integrity: sha512-5aJu+DG7/j9TwKmNIU6fizr6t03N2esu/A+Zdv1gRCUgWCkrBueYeC4TEGbKNgSEMk/66lXtQXp3qEDRdl7lVg==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
 
   react-dom@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
@@ -2835,6 +2844,11 @@ snapshots:
       http-errors: 2.0.0
       iconv-lite: 0.4.24
       unpipe: 1.0.0
+
+  react-datalist-input@3.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
 
   react-dom@18.2.0(react@18.2.0):
     dependencies:
