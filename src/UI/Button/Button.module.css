@@ -1,20 +1,22 @@
+@import url(../../theme.css);
+
 .button {
     cursor: pointer;
     outline: none;
     border: none;
     width: 100%;
     margin: 0px;
-    border-radius: 10px;
+    border-radius: var(--border-radius-m);
     font: inherit;
-    font-size: 15px;
+    font-size: var(--font-size-main-and-input-text);
     font-weight: 600;
-    line-height: 15px;
+    line-height: var(--font-size-main-and-input-text);
     transition: all 0.5s;
 }
 
 .red {
     background: none;
-    color: #D80034;
+    color: var(--active-red-color);
     width: fit-content;
     align-self: center;
 }
@@ -28,16 +30,16 @@
 }
 
 .button:disabled {
-    background-color: #B8002C;
+    background-color: var(--inactive-red-color);
     color: rgba(255, 255, 255, 0.75);
     cursor: default;
 }
 
 .red_filled {
-    background-color: #D80034;
+    background-color: var(--active-red-color);
     color: white;
     font-weight: 500;
-    padding: 15px;
+    padding: var(--spacing-input);
 }
 
 .go_back_arrow {

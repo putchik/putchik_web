@@ -1,3 +1,5 @@
+@import url(../theme.css);
+
 .centeredFrame {
     outline: var(--frame-outline) solid var(--inactive-and-outline-color);
     border-radius: var(--border-radius-l);

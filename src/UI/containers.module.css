@@ -9,21 +9,21 @@
 }
 
 .formContainer {
-    row-gap: 20px;
+    row-gap: var(--spacing-l);
     max-width: 300px;
 }
 
 .gap_20 {
-    gap: 20px;
+    gap: var(--spacing-l);
     max-width: 300px;
 }
 
 .gap_10 {
-    gap: 10px;
+    gap: var(--spacing-m);
     max-width: 300px;
 }
 
-.gap_6 {
-    gap: 6px;
+.gap_5 {
+    gap: var(--spacing-s);
     max-width: 300px;
 }

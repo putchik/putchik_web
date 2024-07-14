@@ -82,7 +82,7 @@ function CodeConfirmation(props: AuthFormStepProps) {
                 numInputs={numInputs}
                 inputType={'tel'}
                 inputStyle={cn(input_styles.input, input_styles.square)}
-                containerStyle={container_styles.gap_6}
+                containerStyle={container_styles.gap_5}
                 shouldAutoFocus={true}
                 renderInput={(props) => <input {...props} style={{ textAlign: 'center' }} />}
             // renderInput={(props, i) => <input {...props} autoComplete={i == 0 ? "one-time-code" : ""} />}

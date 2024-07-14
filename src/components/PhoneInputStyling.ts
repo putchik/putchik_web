@@ -1,7 +1,7 @@
 export const inputStyle = {
     display: 'flex',
     width: '100%',
-    height: 'auto',
+    height: '45px',
     lineHeight: '1.2',
     padding: '10px 15px',
     fontFamily: "'Montserrat', sans-serif",
