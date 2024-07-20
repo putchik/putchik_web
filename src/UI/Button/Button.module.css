@@ -14,6 +14,10 @@
     transition: all 0.5s;
 }
 
+.button_width300px{
+    width: 300px !important; 
+}
+
 .red {
     background: none;
     color: var(--active-red-color);

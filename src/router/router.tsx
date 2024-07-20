@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
 // import { AUTH_PAGE, CODE_PAGE, HOME_PAGE, LOADER_PAGE } from "./paths";
-import { AUTH_PAGE, HOME_PAGE } from "./paths";
+import { AUTH_PAGE, HOME_PAGE, ORDER_PAGE } from "./paths";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
 
 import HomePage from "../pages/HomePage/HomePage";
+import OrderPage from "../pages/OrderPage/OrderPage";
 // import AuthPage from "../pages/AuthPage/AuthPage";
 // import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 // import CodePage from "../pages/CodePage/CodePage";
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
         element: <HomePage />,
         // errorElement: <NotFoundPage />,
     },
+    {
+        path: ORDER_PAGE,
+        element: <OrderPage />
+    }
     // {
     //     path: AUTH_PAGE,
     //     element: <AuthPage />,

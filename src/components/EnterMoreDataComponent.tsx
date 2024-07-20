@@ -16,7 +16,7 @@ interface PersonalDataToBeValidated {
 }
 
 function validatePersonalData(formData: IAuthFormData) {
-    let personalDataValidationStatus: PersonalDataToBeValidated = {
+    const personalDataValidationStatus: PersonalDataToBeValidated = {
         fullNameIsValid: formData.fullName !== ""
     }
     return personalDataValidationStatus
