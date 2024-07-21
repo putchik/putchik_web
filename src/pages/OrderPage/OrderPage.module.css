@@ -110,3 +110,44 @@
     color: black;
     font-weight: 500;
 }
+
+@media (max-width: 1380px) {
+    .order_page{
+        flex-direction: column;
+        row-gap: var(--spacing-2xl);
+        align-items: center;
+    }
+
+    .order_preview_block{
+        width: fit-content;
+    }
+}
+
+@media (max-width: 940px) {
+    .order_cargo_block{
+        flex-direction: column;
+        row-gap: var(--spacing-l);
+    }
+    .place_block{
+        flex-direction: column;
+        row-gap: var(--spacing-l);
+        align-items: flex-end;
+    }
+}
+
+@media (max-width: 768px) {
+    .order_page{
+        row-gap: 0;
+    }
+
+    .order_block{
+        outline: 0;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column;
+        padding: var(--spacing-3xl);
+        row-gap: var(--spacing-l);
+        box-shadow: none;
+        transition: all .5;
+    }
+}
