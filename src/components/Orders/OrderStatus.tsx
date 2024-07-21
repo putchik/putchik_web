@@ -1,9 +1,9 @@
 import styles from "./OrdersLog.module.css";
-import Confirmed from "/Confirmed_2.svg";
-import On_the_way from "/On_the_way.svg";
-import Flag from "/Flag.svg";
-import Dashed_line from "/Dashed_line.svg";
-import Line from "/Line.svg";
+import Confirmed from "../../assets/icons/Confirmed_2.svg";
+import On_the_way from "../../assets/icons/On_the_way.svg";
+import Flag from "../../assets/icons/Flag.svg";
+import Dashed_line from "../../assets/icons/Dashed_line.svg";
+import Line from "../../assets/icons/Line.svg";
 
 import cn from "classnames";
 

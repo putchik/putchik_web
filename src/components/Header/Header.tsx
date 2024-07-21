@@ -1,13 +1,13 @@
 import { Tooltip as ReactTooltip, TooltipRefProps } from "react-tooltip";
 import { AUTH_PAGE, ORDER_PAGE, ORDERS_PAGE, PROFILE_PAGE } from '../../router/paths';
 import styles from "./Header.module.css";
-import logo from '/Logo_full.svg';
-import Profile from '/Profile.svg';
-import List_arrow from '/List_arrow.svg';
-import Support from '/Customer_support.svg';
-import Telegram from '/Telegram_icon.svg';
-import Exit from '/Exit.svg';
-import Burger from '/Burger_menu.svg';
+import logo from '../../assets/icons/Logo_full.svg';
+import Profile from '../../assets/icons/Profile.svg';
+import List_arrow from '../../assets/icons/List_arrow.svg';
+import Support from '../../assets/icons/Customer_support.svg';
+import Telegram from '../../assets/icons/Telegram_icon.svg';
+import Exit from '../../assets/icons/Exit.svg';
+import Burger from '../../assets/icons/Burger_menu.svg';
 
 import cn from "classnames"
 import Button from "../../UI/Button/Button";

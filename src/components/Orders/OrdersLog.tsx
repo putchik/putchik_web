@@ -1,6 +1,6 @@
 import styles from "./OrdersLog.module.css";
 import container_styles from '../../UI/containers.module.css'
-import ordersStory from '/Time.svg'
+import ordersStory from '../../assets/icons/Time.svg'
 import cn from "classnames"
 import Order from "./OrderModel";
 import OrderCard from "./OrderCard";

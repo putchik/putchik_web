@@ -1,11 +1,11 @@
 import styles from "./OrdersLog.module.css";
 import container_styles from '../../UI/containers.module.css';
-import calendar from '/Calendar.svg';
-import path from '/Path.svg';
-import volume from '/Volume.svg';
-import weight from '/Weight.svg';
-import cargo from '/Cargo.svg';
-import pathArrow from '/Path_arrow.svg';
+import calendar from '../../assets/icons/Calendar.svg';
+import path from '../../assets/icons/Path.svg';
+import volume from '../../assets/icons/Volume.svg';
+import weight from '../../assets/icons/Weight.svg';
+import cargo from '../../assets/icons/Cargo.svg';
+import pathArrow from '../../assets/icons/Path_arrow.svg';
 
 import cn from "classnames";
 import RedBox from "./RedBox";
