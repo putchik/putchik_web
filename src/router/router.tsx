@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 
 // import { AUTH_PAGE, CODE_PAGE, HOME_PAGE, LOADER_PAGE } from "./paths";
-import { AUTH_PAGE, HOME_PAGE, ORDER_PAGE } from "./paths";
+import { AUTH_PAGE, HOME_PAGE, ORDER_PAGE, MAIN_PAGE } from "./paths";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
 
 import HomePage from "../pages/HomePage/HomePage";
 import OrderPage from "../pages/OrderPage/OrderPage";
+import MainPage from "../pages/MainPage/MainPage"
 // import AuthPage from "../pages/AuthPage/AuthPage";
 // import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 // import CodePage from "../pages/CodePage/CodePage";
@@ -24,6 +25,11 @@ export const router = createBrowserRouter([
     {
         path: ORDER_PAGE,
         element: <OrderPage />
+    },
+
+    {
+        path: MAIN_PAGE,
+        element: <MainPage />
     }
     // {
     //     path: AUTH_PAGE,

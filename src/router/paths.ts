@@ -3,3 +3,4 @@ export const AUTH_PAGE = "/auth";
 export const CODE_PAGE = "/code";
 export const LOADER_PAGE = "/loader";
 export const ORDER_PAGE = "/order"
+export const MAIN_PAGE = "/main"
