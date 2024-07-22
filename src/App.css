@@ -7,6 +7,14 @@ h2 {
   line-height: 22px;
 }
 
+h3 {
+  margin: 0px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 17px;
+  color: #000;
+}
+
 .hint {
   color: var(--inactive-text-color);
   margin: 0px;

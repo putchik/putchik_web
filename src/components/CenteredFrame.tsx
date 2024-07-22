@@ -13,7 +13,7 @@ interface CenteredFrameProps {
 
 function CenteredFrame(props: CenteredFrameProps) {
     return (
-        <div >
+        <div className={styles.centeredFrameWrapper}>
             {props.showBackArrow &&
                 <Button buttonTheme={ButtonThemes.GO_BACK_ARROW} onClick={props.clickBackArrowHandler}>
                     <img src={backArrow} />

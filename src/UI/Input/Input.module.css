@@ -72,6 +72,11 @@
     color: black;
 }
 
+.input:disabled {
+    border-color: var(--inactive-text-color);
+    color: var(--inactive-text-color);
+}
+
 .calendar_and_time_input{
     max-width: fit-content;
 }
