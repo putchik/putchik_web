@@ -1,3 +1,7 @@
+export interface OrderResponse {
+    orders: Order[];
+}
+
 interface Order {
     id: number;
     readable_id: string;
@@ -9,9 +13,16 @@ interface Order {
     weight: number;
     amount: number;
     temperature_condition: boolean;
-    status: "confirmed" | "in_process" | "done";
+    // Created -> Transit -> Delivered
+    status: OrderStatus;
     loading_points: LoadingPoint[];
     unloading_points: LoadingPoint[];
+}
+
+export enum OrderStatus {
+    CREATED = "Created",
+    TRANSIT = "Transit",
+    DELIVERED = "Delivered",
 }
 
 interface LoadingPoint {

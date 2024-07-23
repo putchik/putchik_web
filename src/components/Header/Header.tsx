@@ -77,7 +77,7 @@ const Header = () => {
                 <ReactTooltip
                     id="profile-options"
                     place="bottom"
-                    className={cn(styles.tooltip, styles.littleTooltip)}
+                    className={cn(styles.tooltip, styles.littleTooltip, styles.onlyBigScreen)}
                     clickable={true}
                     noArrow={true}
                     offset={38}

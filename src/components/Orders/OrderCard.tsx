@@ -11,6 +11,7 @@ import cn from "classnames";
 import RedBox from "./RedBox";
 import Order from "./OrderModel";
 import OrderStatus from "./OrderStatus";
+import formatDate from "../dateFormatter";
 
 const OrderCard = (props: { order: Order }) => {
     return (
@@ -22,35 +23,35 @@ const OrderCard = (props: { order: Order }) => {
                             <h3>{props.order.readable_id}</h3>
                             <div className={cn(styles.text, styles.date)} >
                                 <img className={styles.calendarImage} src={calendar} />
-                                22.01.2024
+                                {formatDate(props.order.created_at)}
                             </div>
                         </div>
                         <OrderStatus status={props.order.status} />
                     </div>
 
                     <div className={cn(container_styles.flex_row, container_styles.gap_10)} style={{ maxWidth: 500, flexWrap: 'wrap' }}>
-                        <RedBox startImgSrc={path} text="120 км" done={props.order.status == "done"}/>
-                        <RedBox startImgSrc={volume} text="12 м³" done={props.order.status == "done"}/>
-                        <RedBox startImgSrc={weight} text="70 кг" done={props.order.status == "done"}/>
-                        <RedBox startImgSrc={cargo} text="Чемоданы" done={props.order.status == "done"}/>
+                        <RedBox startImgSrc={path} text={`${props.order.distance.toString()} км`} done={props.order.status == "Delivered"} />
+                        <RedBox startImgSrc={volume} text={`${props.order.amount} м³`} done={props.order.status == "Delivered"} />
+                        <RedBox startImgSrc={weight} text={`${props.order.weight} кг`} done={props.order.status == "Delivered"} />
+                        <RedBox startImgSrc={cargo} text={props.order.cargo} done={props.order.status == "Delivered"} />
                     </div>
 
                     <div className={styles.pathContainer}>
                         <div>
-                            <div style={{ fontWeight: 500, fontSize: '15px', lineHeight: '17px' }}>Москва</div>
-                            <div className="hint" style={{ wordBreak: 'break-word' }}>ул. Пушкина 13, д. Колотушкина-Пушкина 31</div>
+                            <div style={{ fontWeight: 500, fontSize: '15px', lineHeight: '17px' }}>{props.order.loading_points[0].locality}</div>
+                            <div className="hint" style={{ wordBreak: 'break-word' }}>{props.order.loading_points[0].address}</div>
                         </div>
                         <img src={pathArrow} className={styles.arrowImage} />
                         <div>
-                            <div style={{ fontWeight: 500, fontSize: '15px', lineHeight: '17px' }}>Москва</div>
-                            <div className="hint" style={{ wordBreak: 'break-word' }}>ул. Ковбоев 18, д. Коровников-Дворников 22</div>
+                            <div style={{ fontWeight: 500, fontSize: '15px', lineHeight: '17px' }}>{props.order.unloading_points[0].locality}</div>
+                            <div className="hint" style={{ wordBreak: 'break-word' }}>{props.order.unloading_points[0].address}</div>
                         </div>
                     </div>
                 </div>
 
                 <div className={styles.priceAndRepeatContainer}>
                     <div style={{ marginBlock: 'auto' }}>
-                        <h2 className={styles.price}>{props.order.cost + " ₽"}</h2>
+                        <h2 className={styles.price}>{`${props.order.cost} ₽`}</h2>
                         <div className="hint">с НДС</div>
                     </div>
 
