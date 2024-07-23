@@ -1,5 +1,5 @@
 import { Tooltip as ReactTooltip, TooltipRefProps } from "react-tooltip";
-import { AUTH_PAGE, ORDER_PAGE, ORDERS_PAGE, PROFILE_PAGE } from '../../router/paths';
+import { AUTH_PAGE, MAIN_PAGE, ORDER_PAGE, ORDERS_PAGE, PROFILE_PAGE } from '../../router/paths';
 import styles from "./Header.module.css";
 import logo from '../../assets/icons/Logo_full.svg';
 import Profile from '../../assets/icons/Profile.svg';
@@ -32,6 +32,10 @@ const Header = () => {
         window.location.href = PROFILE_PAGE;
     }
 
+    const handleGoToMainPageClick = () => {
+        window.location.href = MAIN_PAGE;
+    }
+
     const handleExitClick = () => {
         window.localStorage.removeItem('token');
         window.location.href = AUTH_PAGE;
@@ -62,7 +66,7 @@ const Header = () => {
     return (
         <div className={styles.headerWrapper}>
             <div className={styles.centeredFrame}>
-                <img className={styles.logo} src={logo}></img>
+                <img className={styles.logo} src={logo} onClick={handleGoToMainPageClick}></img>
                 <div className={cn(styles.linksSection, styles.onlyBigScreen)}>
                     <a href={ORDER_PAGE}><h3>Оформить заявку</h3></a>
                     <a href={ORDERS_PAGE}><h3>История заявок</h3></a>

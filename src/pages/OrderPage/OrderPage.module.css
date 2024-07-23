@@ -122,6 +122,14 @@
     align-self: flex-start;
 }
 
+.page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: auto;
+    max-width: 100%;
+}
+
 @media (max-width: 1380px) {
     .order_page{
         flex-direction: column;
