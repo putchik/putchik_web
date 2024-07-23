@@ -2,11 +2,14 @@ import { UserInfo } from "../components/Profile/Profile";
 
 async function fetchPutUserProfile(userInfo: UserInfo) {
     try {
-        const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/api/user/me', {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer " + localStorage.getItem('token'));
+        myHeaders.append("Content-Type", "application/json")
+
+        var requestOptions: RequestInit = {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: myHeaders,
+            redirect: 'follow',
             body:
                 userInfo.is_organization_account
                     ? JSON.stringify({
@@ -31,7 +34,8 @@ async function fetchPutUserProfile(userInfo: UserInfo) {
                             inn: userInfo.inn,
                         }
                     })
-        });
+        };
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/api/user/me', requestOptions);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

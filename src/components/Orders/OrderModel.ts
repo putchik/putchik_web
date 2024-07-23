@@ -1,3 +1,13 @@
+import { ProfileResponse } from "../../pages/ProfilePage/ProfilePage";
+
+export interface UsersWithOrders {
+    users: UserWithOrders[];
+}
+
+export interface UserWithOrders extends ProfileResponse {
+    orderResponse: OrderResponse;
+}
+
 export interface OrderResponse {
     orders: Order[];
 }

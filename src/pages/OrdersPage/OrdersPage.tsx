@@ -1,20 +1,31 @@
 import styles from "./OrdersPage.module.css";
 import Header from "../../components/Header/Header";
-import Order, { OrderResponse } from "../../components/Orders/OrderModel";
+import Order, { OrderResponse, UsersWithOrders, UserWithOrders } from "../../components/Orders/OrderModel";
 import OrdersLog from "../../components/Orders/OrdersLog";
 import { useEffect, useState } from "react";
 import fetchGetUserOrders from "../../fetch_functions/fetchGetUserOrders";
+import fetchGetAllUsersOrders from "../../fetch_functions/fetchGetAllUsersOrders";
+import AdminOrdersLog from "../../components/Admin/AdminOrdersLog";
 
 const OrdersPage = () => {
     useEffect(() => {
-        fetchGetUserOrders()
-            .then((data: OrderResponse) => {
-                console.log(data);
-                setOrdersList(data.orders);
-            })
+        if (localStorage.getItem('admin') == undefined) {
+            fetchGetUserOrders()
+                .then((data: OrderResponse) => {
+                    console.log(data);
+                    setOrdersList(data.orders);
+                })
+        } else {
+            fetchGetAllUsersOrders()
+                .then((data: UsersWithOrders) => {
+                    console.log(data);
+                    setUsersWithOrders(data.users);
+                })
+        }
     }, [])
 
-    const [ordersList, setOrdersList] = useState<Order[]>()
+    const [ordersList, setOrdersList] = useState<Order[]>([]);
+    const [usersWithOrders, setUsersWithOrders] = useState<UserWithOrders[]>([]);
 
     // const ordersList: Order[] = [
     //     {
@@ -76,9 +87,9 @@ const OrdersPage = () => {
     return (
         <div className={styles.page}>
             <Header />
-            {ordersList ?
-                <OrdersLog orderList={ordersList} />
-                : <h3>История заявок пуста</h3>
+            {localStorage.getItem('admin') == undefined
+                ? <OrdersLog orderList={ordersList} />
+                : <AdminOrdersLog orderList={usersWithOrders} />
             }
         </div>
     );

@@ -13,9 +13,11 @@ const OrdersLog = (props: { orderList: Order[] }) => {
                 <h2>История заявок</h2>
             </div>
             <div className={styles.orderListContainer}>
-                {props.orderList.map((order: Order, i: number) => (
-                    <OrderCard order={order} key={i} />
-                ))}
+                {props.orderList.length == 0
+                    ? <h3>История заявок пуста</h3>
+                    : props.orderList.map((order: Order, i: number) => (
+                        <OrderCard order={order} key={i} />
+                    ))}
             </div>
         </div>
     );

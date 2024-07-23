@@ -6,6 +6,7 @@ import volume from '../../assets/icons/Volume.svg';
 import weight from '../../assets/icons/Weight.svg';
 import cargo from '../../assets/icons/Cargo.svg';
 import pathArrow from '../../assets/icons/Path_arrow.svg';
+import temp from '../../assets/icons/Temp_regime.svg';
 
 import cn from "classnames";
 import RedBox from "./RedBox";
@@ -33,7 +34,7 @@ const OrderCard = (props: { order: Order }) => {
                         <RedBox startImgSrc={path} text={`${props.order.distance.toString()} км`} done={props.order.status == "Delivered"} />
                         <RedBox startImgSrc={volume} text={`${props.order.amount} м³`} done={props.order.status == "Delivered"} />
                         <RedBox startImgSrc={weight} text={`${props.order.weight} кг`} done={props.order.status == "Delivered"} />
-                        <RedBox startImgSrc={cargo} text={props.order.cargo} done={props.order.status == "Delivered"} />
+                        <RedBox startImgSrc={cargo} endImgSrc={temp} text={props.order.cargo} done={props.order.status == "Delivered"} />
                     </div>
 
                     <div className={styles.pathContainer}>

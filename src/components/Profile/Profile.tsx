@@ -34,7 +34,7 @@ const Profile = (props: { userInfo: UserInfo, handleInputChange: (name: string, 
                 : <PhysicalProfile
                     userInfo={props.userInfo}
                     handleInputChange={
-                        (name: string, value: string) => {
+                        (name: string, value: any) => {
                             props.handleInputChange(name, value);
                         }
                     } />}

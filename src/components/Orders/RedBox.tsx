@@ -13,7 +13,7 @@ const RedBox = (props: RedBoxProps) => {
         <div className={cn(styles.redContainer, (props.done ? styles.inactive : "") )} style={{ color: 'white' }}>
             <img className={styles.basicIcon} src={props.startImgSrc} />
             <div>{props.text}</div>
-            {props.endImgSrc && <img src={props.endImgSrc} />}
+            {props.endImgSrc && <img className={styles.basicIcon} src={props.endImgSrc} />}
         </div>
     );
 };
