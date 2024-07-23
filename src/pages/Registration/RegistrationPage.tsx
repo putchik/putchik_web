@@ -14,7 +14,7 @@ function RegistrationPage() {
     const [formData, setFormData] = useState<IAuthFormData>({
         email: '',
         phone: '',
-        person: null,
+        is_organization_account: true,
         companyName: '',
         companyINN: '',
         fullName: '',
@@ -22,7 +22,7 @@ function RegistrationPage() {
         userAlreadyExists: false,
     });
 
-    const handleInputChange = (name: string, value: string) => {
+    const handleInputChange = (name: string, value: any) => {
         setFormData({ ...formData, [name]: value });
         // console.log(name + ': ' + value);
     };

@@ -4,7 +4,7 @@ import { InputThemes } from "../../UI/Input/InputTypes";
 import { UserInfo } from "./Profile"
 import CustomPhoneInput from "../../UI/Input/CustomPhoneInput";
 
-const IndividualProfile = (props: { userInfo: UserInfo, handleInputChange: (name: string, value: string) => void }) => {
+const IndividualProfile = (props: { userInfo: UserInfo, handleInputChange: (name: string, value: any) => void }) => {
     return (
         <div className={styles.inputWrapper}>
             <div className={styles.inputContainer}>

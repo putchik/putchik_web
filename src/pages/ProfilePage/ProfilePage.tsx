@@ -10,14 +10,14 @@ const ProfilePage = () => {
         {
             email: 'sjvvljnkvjvnk@nscj.ru',
             phone: '+78909876789',
-            person: 'physical',
+            is_organization_account: false,
             companyName: 'comp',
             companyINN: 'inn',
             fullName: 'Иван Иванов',
         }
     )
 
-    const handleInputChange = (name: string, value: string) => {
+    const handleInputChange = (name: string, value: any) => {
         setUserInfo({ ...userInfo, [name]: value });
         // console.log(name + ': ' + value);
     };

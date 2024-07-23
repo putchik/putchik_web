@@ -5,7 +5,7 @@ import { UserInfo } from "./Profile";
 import CustomPhoneInput from "../../UI/Input/CustomPhoneInput";
 
 
-const PhysicalProfile = (props: { userInfo: UserInfo, handleInputChange: (name: string, value: string) => void }) => {
+const PhysicalProfile = (props: { userInfo: UserInfo, handleInputChange: (name: string, value: any) => void }) => {
     return (
         <div className={styles.inputWrapper}>
             <div className={styles.inputContainer}>
@@ -29,6 +29,8 @@ const PhysicalProfile = (props: { userInfo: UserInfo, handleInputChange: (name: 
                 <Input
                     inputTheme={InputThemes.RED}
                     value={props.userInfo.email}
+                    isValid={false}
+                    errorMessage=""
                     name="email"
                     onChange={(e: any) => { props.handleInputChange('email', e.target.value) }} />
             </div>

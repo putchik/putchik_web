@@ -10,23 +10,33 @@ import { ButtonThemes } from "../../UI/Button/ButtonTypes";
 export interface UserInfo {
     email: string,
     phone: string,
-    person: "individual" | "physical",
+    is_organization_account: boolean,
     companyName: string,
     companyINN: string,
     fullName: string,
 }
 
-const Profile = (props: { userInfo: UserInfo, handleInputChange: (name: string, value: string) => void }) => {
+const Profile = (props: { userInfo: UserInfo, handleInputChange: (name: string, value: any) => void }) => {
+    
+    
     return (
         <div className={styles.centeredFrame}>
             <div className={cn(container_styles.flex_row, container_styles.gap_10)} style={{ width: 300 }}>
                 <img className={styles.basicIcon} src={ProfilePic}></img>
                 <h2>Личный кабинет</h2>
             </div>
-            {props.userInfo.person === "individual" ?
+            {props.userInfo.is_organization_account ?
                 <IndividualProfile userInfo={props.userInfo} handleInputChange={props.handleInputChange} />
-                : <PhysicalProfile userInfo={props.userInfo} handleInputChange={props.handleInputChange} />}
-            <Button buttonTheme={ButtonThemes.RED_FILLED}>Сохранить изменения</Button>
+                : <PhysicalProfile
+                    userInfo={props.userInfo}
+                    handleInputChange={
+                        (name: string, value: string) => {
+                            props.handleInputChange(name, value);
+                        }
+                    } />}
+            <Button buttonTheme={ButtonThemes.RED_FILLED}>
+                Сохранить изменения
+            </Button>
         </div>
     );
 };
