@@ -48,8 +48,3 @@
     flex-direction: column;
     row-gap: var(--spacing-m);
 }
-
-.phone_input input:focus {
-    border: var(--border-stroke) solid var(--active-red-color) !important;
-    color: black !important;
-}

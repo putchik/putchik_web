@@ -1,9 +1,8 @@
 import Input from "../../UI/Input/Input";
 import styles from "./Profile.module.css";
 import { InputThemes } from "../../UI/Input/InputTypes";
-import { buttonStyle, containerStyle, inputStyle } from '../PhoneInputStyling';
 import { UserInfo } from "./Profile"
-import PhoneInput from "react-phone-input-2";
+import CustomPhoneInput from "../../UI/Input/CustomPhoneInput";
 
 const IndividualProfile = (props: { userInfo: UserInfo, handleInputChange: (name: string, value: string) => void }) => {
     return (
@@ -26,23 +25,9 @@ const IndividualProfile = (props: { userInfo: UserInfo, handleInputChange: (name
             </div>
             <div className={styles.inputContainer}>
                 <h3>Номер телефона</h3>
-                <PhoneInput
-                    inputClass={styles.phone_input}
-                    country={'ru'}
-                    onlyCountries={['ru']}
-                    disableDropdown
-                    disableSearchIcon={true}
-                    countryCodeEditable={false}
-                    value={props.userInfo.phone}
-                    placeholder={"+7 (999) 999-99-99"}
-                    onChange={(phone: string) => { props.handleInputChange('phone', phone) }}
-                    containerStyle={containerStyle}
-                    buttonStyle={buttonStyle}
-                    inputStyle={inputStyle}
-                    inputProps={{
-                        name: 'phone',
-                        required: true,
-                    }} />
+                <CustomPhoneInput
+                    phone={props.userInfo.phone}
+                    onChange={(phone: string) => { props.handleInputChange('phone', phone)}} />
             </div>
             <div className={styles.inputContainer}>
                 <h3>Почта</h3>
