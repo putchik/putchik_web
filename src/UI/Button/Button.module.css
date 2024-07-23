@@ -25,6 +25,13 @@
     align-self: center;
 }
 
+.black {
+    background: none;
+    color: black;
+    width: fit-content;
+    align-self: center;
+}
+
 .clickable:hover:not(:disabled) {
     filter: brightness(110%);
 }

@@ -111,6 +111,17 @@
     font-weight: 500;
 }
 
+.remove_button{
+    margin-top: var(--spacing-l);
+}
+
+.add_point_button{
+    display: flex;
+    justify-content: center;
+    column-gap: var(--spacing-m);
+    align-self: flex-start;
+}
+
 @media (max-width: 1380px) {
     .order_page{
         flex-direction: column;
