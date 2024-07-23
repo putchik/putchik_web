@@ -117,7 +117,7 @@ const Header = () => {
                     openEvents={{ ['click']: true }}
                     closeEvents={{ ['click']: true }}
                 >
-                    {localStorage.getItem('admin') !== undefined &&
+                    {localStorage.getItem('admin') == undefined &&
                         <Button buttonTheme={ButtonThemes.RED_FILLED} className={cn(styles.littleRow, styles.red)} onClick={handleGoToProfilePageClick}>
                             <img src={Profile} />
                             Личный кабинет
@@ -169,7 +169,7 @@ const Header = () => {
                             <h3>{username}</h3>
                         </div>
                         <div>
-                            {localStorage.getItem('admin') !== undefined &&
+                            {localStorage.getItem('admin') == undefined &&
                                 <Button buttonTheme={ButtonThemes.RED} className={cn(styles.littleRow, styles.redText)} onClick={handleGoToProfilePageClick}>
                                     <img src={Profile} />
                                     Личный кабинет

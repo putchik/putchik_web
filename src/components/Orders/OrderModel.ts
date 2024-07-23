@@ -5,7 +5,7 @@ export interface UsersWithOrders {
 }
 
 export interface UserWithOrders extends ProfileResponse {
-    orderResponse: OrderResponse;
+    orders: Order[];
 }
 
 export interface OrderResponse {

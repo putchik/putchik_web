@@ -5,6 +5,7 @@ import cn from "classnames"
 import Order from "../Orders/OrderModel";
 import OrderCard from "../Orders/OrderCard";
 import { UserWithOrders } from "../Orders/OrderModel";
+import { formatPhoneNumber } from "../GoToRegistration";
 
 const AdminOrdersLog = (props: { orderList: UserWithOrders[] }) => {
     return (
@@ -15,18 +16,16 @@ const AdminOrdersLog = (props: { orderList: UserWithOrders[] }) => {
             </div>
             <div className={styles.orderListContainer}>
                 {
-                    props.orderList.map((user: UserWithOrders, i: number) => (
-                        <div key={'user-' + user.id}>
+                    props.orderList.map((user: UserWithOrders) => (
+                        <div key={'user-' + user.id} style={{ display: "flex", flexDirection: 'column', rowGap: 10 }}>
                             <h3>
-                                {`Пользователь: ${user.is_organization_account ? user.organization?.organization_name : user.name}`}
+                                {`Пользователь: ${user.is_organization_account ? user.organization?.organization_name : user.name},
+                                Телефон: ${formatPhoneNumber(user.phone)}, Почта: ${user.email} `}
                             </h3>
-                            
                             {
-                                
-                                // user?.orderResponse?.orders?.map((order: Order) => <OrderCard order={order} key={i} />)
-                                // user.orderResponse.orders.map((order: Order, i: number) => (
-                                //     <OrderCard order={order} key={i} />
-                                // ))
+                                user.orders.map((order: Order) => (
+                                    <OrderCard order={order} key={'order=' + order.readable_id} />
+                                ))
                             }
                         </div>
                     ))
