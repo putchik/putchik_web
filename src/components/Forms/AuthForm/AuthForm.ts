@@ -4,8 +4,8 @@ export interface IAuthFormData {
     email: string;
     phone: string;
     is_organization_account: boolean;
-    companyName: string;
-    companyINN: string;
+    organization: string;
+    inn: string;
     fullName: string;
     terms: boolean;
     userAlreadyExists: boolean;

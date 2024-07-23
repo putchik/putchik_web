@@ -11,17 +11,17 @@ const IndividualProfile = (props: { userInfo: UserInfo, handleInputChange: (name
                 <h3>Название организации</h3>
                 <Input
                     inputTheme={InputThemes.RED}
-                    value={props.userInfo.companyName}
-                    name="companyName"
-                    onChange={(e: any) => { props.handleInputChange('companyName', e.target.value) }} />
+                    value={props.userInfo.organization}
+                    name="organization"
+                    onChange={(e: any) => { props.handleInputChange('organization', e.target.value) }} />
             </div>
             <div className={styles.inputContainer}>
                 <h3>ИНН организации</h3>
                 <Input
                     inputTheme={InputThemes.RED}
-                    value={props.userInfo.companyINN}
-                    name="companyINN"
-                    onChange={(e: any) => { props.handleInputChange('companyINN', e.target.value) }} />
+                    value={props.userInfo.inn}
+                    name="inn"
+                    onChange={(e: any) => { props.handleInputChange('inn', e.target.value) }} />
             </div>
             <div className={styles.inputContainer}>
                 <h3>Номер телефона</h3>

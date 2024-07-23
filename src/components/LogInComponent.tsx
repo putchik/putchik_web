@@ -55,6 +55,7 @@ function LogInComponent(props: LogInComponentProps) {
                             if (data.user_exists) {
                                 props.setUserAlreadyExists(true);
                                 props.handleNextStep(3);
+                                console.log(data);
                             } else {
                                 props.setUserAlreadyExists(false);
                                 props.handleNextStep();

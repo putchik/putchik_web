@@ -91,8 +91,8 @@ export async function fetchPostVerifyOtpRegisterAsOrg(typeOfLogin: TypesOfLogin,
         totp_contact_type: typeOfLogin,
         phone: typeOfLogin === "phone" ? formData.phone : undefined,
         email: typeOfLogin === "email" ? formData.email : undefined,
-        organization_name: formData.companyName,
-        inn: formData.companyINN,
+        organization_name: formData.organization,
+        inn: formData.inn,
     };
 
     const body = JSON.stringify(bodyData);
@@ -111,7 +111,7 @@ export async function fetchPostVerifyOtpRegisterAsOrg(typeOfLogin: TypesOfLogin,
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('There was a problem with the /api/auth/register/as_organization/verify_otp fetch operation:', error);
+        console.error('There was a problem with the /api/auth/register/as_organization/verify_otp fetch operation:');
         throw error;
     }
 }

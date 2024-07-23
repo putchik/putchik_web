@@ -12,7 +12,9 @@ import Burger from '../../assets/icons/Burger_menu.svg';
 import cn from "classnames"
 import Button from "../../UI/Button/Button";
 import { ButtonThemes } from "../../UI/Button/ButtonTypes";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import fetchGetUserProfile from "../../fetch_functions/fetchGetUserProfile";
+import { UserInfo } from "../Profile/Profile";
 
 const Header = () => {
     const poputchik_email: string = "poputchik@poputchik.ru";
@@ -40,7 +42,22 @@ const Header = () => {
         setDropdownState(!dropdownState);
     }
 
-    const tooltipRef1 = useRef<TooltipRefProps>(null)
+    const tooltipRef1 = useRef<TooltipRefProps>(null);
+
+    useEffect(() => {
+        let username = localStorage.getItem('username');
+        if (username == undefined) {
+            fetchGetUserProfile()
+                .then((data: UserInfo) => {
+                    setUsername(data.is_organization_account ? data.organization : data.name);
+                    localStorage.setItem('username', data.is_organization_account ? data.organization : data.name);
+                })
+        } else {
+            setUsername(username);
+        }
+    }, [])
+
+    const [username, setUsername] = useState<string>('');
 
     return (
         <div className={styles.headerWrapper}>
@@ -97,7 +114,7 @@ const Header = () => {
                     </Button>
                 </ReactTooltip>
                 <div className={cn(styles.profile, styles.onlyBigScreen)} data-tooltip-id="profile-options">
-                    <h3>Иван</h3>
+                    <h3>{username}</h3>
                     <img src={Profile} />
                 </div>
                 <ReactTooltip
@@ -135,7 +152,7 @@ const Header = () => {
 
                     <div className={cn(styles.sectionContainer)}>
                         <div className={cn(styles.profile)} >
-                            <h3>Иван Иванов</h3>
+                            <h3>{username}</h3>
                         </div>
                         <div>
                             <Button buttonTheme={ButtonThemes.RED} className={cn(styles.littleRow, styles.redText)} onClick={handleGoToProfilePageClick}>

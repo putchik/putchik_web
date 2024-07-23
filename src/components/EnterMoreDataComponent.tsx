@@ -43,19 +43,19 @@ function EnterPersonalDataComponent(props: CheckboxProps) {
                     <Input
                         inputTheme={InputThemes.RED}
                         autoFocus={true}
-                        value={props.formData.companyName}
-                        name="companyName"
+                        value={props.formData.organization}
+                        name="organization"
                         placeholder="Название организации"
                         // Добавить вывод ошибки, если она происходит
-                        onChange={(e: any) => { props.handleInputChange('companyName', e.target.value) }} />
+                        onChange={(e: any) => { props.handleInputChange('organization', e.target.value) }} />
                     <Input
                         inputTheme={InputThemes.RED}
                         autoFocus={false}
-                        value={props.formData.companyINN}
-                        name="companyINN"
+                        value={props.formData.inn}
+                        name="inn"
                         placeholder="ИНН"
                         // Добавить вывод ошибки, если она происходит
-                        onChange={(e: any) => { props.handleInputChange('companyINN', e.target.value) }} />
+                        onChange={(e: any) => { props.handleInputChange('inn', e.target.value) }} />
                 </div>
                 : <Input
                     inputTheme={InputThemes.RED}
@@ -87,7 +87,7 @@ function EnterPersonalDataComponent(props: CheckboxProps) {
             <Button
                 children={"Далее"}
                 buttonTheme={ButtonThemes.RED_FILLED}
-                disabled={(props.formData.is_organization_account && (props.formData.companyName == "" || props.formData.companyINN == "" || !props.formData.terms))
+                disabled={(props.formData.is_organization_account && (props.formData.organization == "" || props.formData.inn == "" || !props.formData.terms))
                     || (!props.formData.is_organization_account && (props.formData.fullName == "" || !props.formData.terms))
                 }
                 onClick={() => {

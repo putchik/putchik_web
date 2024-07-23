@@ -12,7 +12,7 @@ const PhysicalProfile = (props: { userInfo: UserInfo, handleInputChange: (name: 
                 <h3>ФИО</h3>
                 <Input
                     inputTheme={InputThemes.RED}
-                    value={props.userInfo.fullName}
+                    value={props.userInfo.name}
                     name="fullName"
                     style={{ textTransform: 'capitalize' }}
                     onChange={(e: any) => { props.handleInputChange('fullName', e.target.value) }} />

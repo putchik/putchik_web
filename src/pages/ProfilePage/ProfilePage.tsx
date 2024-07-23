@@ -6,26 +6,52 @@ import fetchGetUserProfile from "../../fetch_functions/fetchGetUserProfile";
 
 
 const ProfilePage = () => {
+    interface ProfileResponse {
+        id: number,
+        name: string,
+        is_organization_account: boolean,
+        email: string,
+        organization: null | {
+            id: number,
+            organization_name: string,
+            inn: number,
+        },
+        inn: string,
+        phone: string,
+    }
+
     const [userInfo, setUserInfo] = useState<UserInfo>(
         {
-            email: 'sjvvljnkvjvnk@nscj.ru',
-            phone: '+78909876789',
+            id: 0,
+            name: '',
             is_organization_account: false,
-            companyName: 'comp',
-            companyINN: 'inn',
-            fullName: 'Иван Иванов',
+            email: '',
+            organization: '',
+            inn: '',
+            phone: '',
         }
     )
 
     const handleInputChange = (name: string, value: any) => {
         setUserInfo({ ...userInfo, [name]: value });
-        // console.log(name + ': ' + value);
     };
 
     useEffect(() => {
         if (localStorage.getItem('token') !== '') {
             fetchGetUserProfile()
-                .then(data => console.log(data))
+                .then((data: ProfileResponse) => {
+                    console.log(data);
+
+                    setUserInfo({
+                        id: data.id,
+                        name: data.name,
+                        is_organization_account: data.is_organization_account,
+                        email: data.email == null ? '' : data.email,
+                        organization: data.organization ? data.organization.organization_name?.toString() : '',
+                        inn: data.organization ? data.organization.inn.toString() : '',
+                        phone: data.phone,
+                    });
+                })
         }
     }, [])
 
