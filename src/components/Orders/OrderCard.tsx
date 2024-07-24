@@ -14,7 +14,6 @@ import RedBox from "./RedBox";
 import Order from "./OrderModel";
 import OrderStatus from "./OrderStatus";
 import formatDate from "../dateFormatter";
-import { useNavigate } from "react-router-dom";
 
 const OrderCard = (props: { order: Order }) => {
   const navigate = useNavigate();
