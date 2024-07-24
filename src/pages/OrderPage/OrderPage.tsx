@@ -18,7 +18,7 @@ import Input from '../../UI/Input/Input';
 import Header from '../../components/Header/Header';
 
 import fetchGetDistance from '../../fetch_functions/fetchGetDistance';
-import fetchOrderDetails from '../../fetch_functions/fetchCreateOrder';
+import fetchCreateOrder from '../../fetch_functions/fetchCreateOrder';
 
 import { buttonStyle, containerStyle, inputStyle } from '../../components/PhoneInputStyling';
 
@@ -71,7 +71,7 @@ export default function OrderPage() {
   const [vatValue, setVatValue] = useState<string>('');
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  const [additionalBlocks, setAdditionalBlocks] = useState<AdditionalBlock[]>([]);
+  const [additionalLoadingPoints, setAdditionalLoadingPoints] = useState<AdditionalBlock[]>([]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -97,7 +97,7 @@ export default function OrderPage() {
       setVatValue(order.cost ? "с НДС" : "без НДС");
       setIsChecked(order.temperature_condition);
 
-      setAdditionalBlocks(order.loading_points.slice(1).map(point => ({
+      setAdditionalLoadingPoints(order.loading_points.slice(1).map(point => ({
         city: point.locality,
         address: point.address,
         phone: point.phone,
@@ -168,11 +168,11 @@ export default function OrderPage() {
 
         const adjustedWeight = selectedUnit === 'т' ? weightValue! * 1000 : weightValue!;
 
-        const orderDetails = await fetchOrderDetails(
+        const orderDetails = await fetchCreateOrder(
           cargoValue, adjustedWeight, amountValue!, isoDateString,
           onLoadingCityValue, onLoadingValue, onLoadingPhoneValue,
           onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue,
-          isChecked
+          isChecked, additionalLoadingPoints
         );
 
         console.log('Данные о заказе:', orderDetails);
@@ -194,7 +194,7 @@ export default function OrderPage() {
   }, [
     cargoValue, weightValue, amountValue, date, time,
     onLoadingCityValue, onLoadingValue, onLoadingPhoneValue,
-    onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue, isChecked, selectedUnit, distanceValue
+    onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue, isChecked, selectedUnit, distanceValue, additionalLoadingPoints
   ]);
 
   const getISODateString = (date: string, time: string) => {
@@ -329,18 +329,18 @@ export default function OrderPage() {
     }
   };
 
-  const handleAddBlock = () => {
-    setAdditionalBlocks([...additionalBlocks, { city: '', address: '', phone: '' }]);
+  const handleAddLoadingBlock = () => {
+    setAdditionalLoadingPoints([...additionalLoadingPoints, { city: '', address: '', phone: '' }]);
   };
 
-  const handleRemoveBlock = (index: number) => {
-    setAdditionalBlocks(additionalBlocks.filter((_, i) => i !== index));
+  const handleRemoveLoadingBlock = (index: number) => {
+    setAdditionalLoadingPoints(additionalLoadingPoints.filter((_, i) => i !== index));
   };
 
-  const handleBlockChange = (index: number, field: keyof AdditionalBlock, value: string) => {
-    const updatedBlocks = [...additionalBlocks];
+  const handleLoadingBlockChange = (index: number, field: keyof AdditionalBlock, value: string) => {
+    const updatedBlocks = [...additionalLoadingPoints];
     updatedBlocks[index][field] = value;
-    setAdditionalBlocks(updatedBlocks);
+    setAdditionalLoadingPoints(updatedBlocks);
   };
 
   return (
@@ -461,26 +461,26 @@ export default function OrderPage() {
               <Button
                 buttonTheme={ButtonThemes.BLACK}
                 className={cn(button_styles.button, button_styles.button_width300px)}
-                onClick={handleAddBlock}
+                onClick={handleAddLoadingBlock}
               >
-                Добавить точку погрузки/разгрузки
+                Добавить точку погрузки
               </Button>
             </div>
 
-            {additionalBlocks.map((block, index) => (
+            {additionalLoadingPoints.map((block, index) => (
               <div key={index} className={styles.loading_block}>
                 <div className={styles.place_block}>
                   <div className={styles.city_block}>
                     <img src={point_icon} alt="Населённый пункт" className={icon_styles.add_order_icon} />
                     <City
                       value={block.city}
-                      onChange={(value) => handleBlockChange(index, 'city', value)} />
+                      onChange={(value) => handleLoadingBlockChange(index, 'city', value)} />
                   </div>
                   <Address
                     id={`loadingInput${index}`}
                     value={block.address}
-                    onChange={(e) => handleBlockChange(index, 'address', e.target.value)}
-                    onClear={() => handleBlockChange(index, 'address', '')}
+                    onChange={(e) => handleLoadingBlockChange(index, 'address', e.target.value)}
+                    onClear={() => handleLoadingBlockChange(index, 'address', '')}
                   />
                 </div>
                 <div className={styles.phone_block}>
@@ -493,7 +493,7 @@ export default function OrderPage() {
                       disableDropdown
                       disableSearchIcon={true}
                       value={block.phone}
-                      onChange={(phone) => handleBlockChange(index, 'phone', phone)}
+                      onChange={(phone) => handleLoadingBlockChange(index, 'phone', phone)}
                       countryCodeEditable={false}
                       placeholder={"+7 (999) 999-99-99"}
                       containerStyle={containerStyle}
@@ -510,7 +510,7 @@ export default function OrderPage() {
                 <Button
                   buttonTheme={ButtonThemes.RED_FILLED}
                   className={cn(button_styles.button, button_styles.button_width300px, styles.remove_button)}
-                  onClick={() => handleRemoveBlock(index)}
+                  onClick={() => handleRemoveLoadingBlock(index)}
                 >
                   Удалить точку
                 </Button>
@@ -638,7 +638,7 @@ export default function OrderPage() {
                 </div>
               </div>
 
-              {additionalBlocks.map((block, index) => (
+              {additionalLoadingPoints.map((block, index) => (
                 <div key={index} className={styles.order_preview_element_info}>
                   {block.city && block.address ? <img src={point_icon} className={icon_styles.add_order_icon}></img> : <img src={point_icon} className={icon_styles.preview_order_icon}></img>}
                   <div className={styles.order_preview_element_place}>
