@@ -1,6 +1,8 @@
 import cn from "classnames";
 import styles from "./MainPage.module.css";
 
+import { useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import firstBlockCircle from '../../assets/images/firstBlockCircle.svg'
@@ -15,14 +17,23 @@ import manAndTruck from '../../assets/images/ManAndTruck.svg'
 import Button from "../../UI/Button/Button";
 import { ButtonThemes } from "../../UI/Button/ButtonTypes";
 import Header from "../../components/Header/Header";
+import { ORDER_PAGE, AUTH_PAGE } from "../../router/paths";
+
 
 
 const MainPage = () => {
     const navigate = useNavigate();
 
 const handleClick = () => {
-  navigate('/order');
+  navigate(ORDER_PAGE);
 };  
+
+useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate(AUTH_PAGE);
+    }
+  }, [navigate]);
 
     return (
         <div className={styles.page}>

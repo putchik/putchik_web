@@ -45,6 +45,7 @@ import { ButtonThemes } from '../../UI/Button/ButtonTypes';
 import { InputThemes } from '../../UI/Input/InputTypes';
 
 import Order from '../../components/Orders/OrderModel'; // Импортируем типы и интерфейсы
+import { AUTH_PAGE } from '../../router/paths';
 
 dayjs.extend(customParseFormat);
 
@@ -61,7 +62,7 @@ export default function OrderPage() {
   const [onUnloadingPhoneValue, setOnUnloadingPhoneValue] = useState<string>('');
   const [onLoadingValue, setOnLoadingValue] = useState<string>('');
   const [onUnloadingValue, setOnUnloadingValue] = useState<string>('');
-  const [selectedUnit, setSelectedUnit] = useState<string>('кг');
+  const [selectedUnit, setSelectedUnit] = useState<string>('');
   const [onLoadingCityValue, setOnLoadingCityValue] = useState<string>('');
   const [onUnloadingCityValue, setUnloadingCityValue] = useState<string>('');
   const [date, setDate] = useState<string>('');
@@ -71,12 +72,20 @@ export default function OrderPage() {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [vatValue, setVatValue] = useState<string>('');
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [price, setPrice] = useState<number>(0);
 
   const [additionalBlocks, setAdditionalBlocks] = useState<AdditionalBlock[]>([]);
   const navigate = useNavigate();
   const location = useLocation();
 
   const mode = location.state?.mode || 'create';
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate(AUTH_PAGE);
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (mode === 'edit' || mode === 'repeat') {
@@ -95,8 +104,9 @@ export default function OrderPage() {
       setDate(dayjs(order.created_at).format('DD.MM.YYYY'));
       setTime(dayjs(order.created_at).format('HH:mm'));
       setDistanceValue(order.distance / 1000);
-      setVatValue(order.cost ? "с НДС" : "без НДС");
+      setVatValue(order.cost ? 'с НДС' : 'без НДС');
       setIsChecked(order.temperature_condition);
+      setPrice(order.cost);
 
       setAdditionalBlocks(order.loading_points.slice(1).map(point => ({
         city: point.locality,
@@ -152,26 +162,32 @@ export default function OrderPage() {
         const isoDateString = getISODateString(date, time);
         const adjustedWeight = selectedUnit === 'т' ? weightValue! * 1000 : weightValue!;
 
+        const additionalLoadingPoints = additionalBlocks.map(block => ({
+          locality: block.city,
+          address: block.address,
+          phone: block.phone,
+        }));
+
         if (mode === 'create' || mode === 'repeat') {
           const orderDetails = await fetchCreateOrder(
-            cargoValue, 10000, adjustedWeight, amountValue!, isoDateString,
+            cargoValue, price, adjustedWeight, amountValue!, isoDateString,
             onLoadingCityValue, onLoadingValue, onLoadingPhoneValue,
             onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue,
-            isChecked, distanceValue!
+            isChecked, distanceValue!, additionalLoadingPoints
           );
           console.log('Данные о созданном заказе:', orderDetails);
           return orderDetails;
         } else {
           const id = location.state?.order?.id ?? 0;
           const statusValue = location.state?.order?.status ?? 'new';
-  
+
           const orderDetails = await fetchUpdateOrder(
-            id, cargoValue, 10000, adjustedWeight, amountValue!, isoDateString,
+            id, cargoValue, price, adjustedWeight, amountValue!, isoDateString,
             onLoadingCityValue, onLoadingValue, onLoadingPhoneValue,
             onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue,
-            isChecked, statusValue, distanceValue!
+            isChecked, statusValue, distanceValue!, additionalLoadingPoints
           );
-  
+
           console.log('Данные о заказе:', orderDetails);
           return orderDetails;
         }
@@ -184,7 +200,7 @@ export default function OrderPage() {
   }, [
     cargoValue, weightValue, amountValue, date, time,
     onLoadingCityValue, onLoadingValue, onLoadingPhoneValue,
-    onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue, isChecked, selectedUnit, distanceValue, location.state, mode
+    onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue, isChecked, selectedUnit, distanceValue, location.state, mode, additionalBlocks
   ]);
 
   const getISODateString = (date: string, time: string) => {
@@ -362,20 +378,15 @@ export default function OrderPage() {
                     maxLength={4}
                     className={input_styles.weight_amount_vat_input}
                     placeholder='Вес'
-                    list="weight_units"
                   />
-                  <datalist id="weight_units">
-                    <option value="кг" />
-                    <option value="т" />
-                  </datalist>
                 </div>
                 <Dropdown
                   id="weight_type"
                   value={selectedUnit}
                   onChange={handleDropdownChange}
                   options={[
-                    { label: "кг", value: "кг" },
-                    { label: "т", value: "т" },
+                    { label: 'кг', value: 'кг' },
+                    { label: 'т', value: 'т' },
                   ]}
                 />
               </div>
@@ -391,8 +402,8 @@ export default function OrderPage() {
                 autoFocus={false}
                 checked={isChecked}
                 onChange={handleCheckboxChange}
-                name="terms"
-                type="checkbox"
+                name='terms'
+                type='checkbox'
               />
               <div className={styles.order_temp_text}>
                 Температурный режим
@@ -414,20 +425,20 @@ export default function OrderPage() {
               <p>Загрузка</p>
               <div className={styles.place_block}>
                 <div className={styles.city_block}>
-                  <img src={point_icon} alt="Населённый пункт" className={icon_styles.add_order_icon} />
+                  <img src={point_icon} alt='Населённый пункт' className={icon_styles.add_order_icon} />
                   <City
                     value={onLoadingCityValue}
                     onChange={handleOnLoadingCityChange} />
                 </div>
                 <Address
-                  id="onLoadingInput"
+                  id='onLoadingInput'
                   value={onLoadingValue}
                   onChange={handleInputChange1}
                   onClear={clearLoadingInput}
                 />
               </div>
               <div className={styles.phone_block}>
-                <img src={phone_icon} alt="Телефон" className={icon_styles.add_order_icon} />
+                <img src={phone_icon} alt='Телефон' className={icon_styles.add_order_icon} />
                 <div className={styles.phone_input}>
                   <PhoneInput
                     inputClass={input_styles.phone_input}
@@ -438,7 +449,7 @@ export default function OrderPage() {
                     value={onLoadingPhoneValue}
                     onChange={(phone) => setLoadingPhoneValue(phone)}
                     countryCodeEditable={false}
-                    placeholder={"+7 (999) 999-99-99"}
+                    placeholder={'+7 (999) 999-99-99'}
                     containerStyle={containerStyle}
                     buttonStyle={buttonStyle}
                     inputStyle={inputStyle}
@@ -453,7 +464,7 @@ export default function OrderPage() {
             </div>
 
             <div className={styles.add_point_button}>
-              <img src={add_icon} className={icon_styles.add_order_icon}/>
+              <img src={add_icon} className={icon_styles.add_order_icon} />
               <Button
                 buttonTheme={ButtonThemes.BLACK}
                 className={cn(button_styles.button, button_styles.button_width300px)}
@@ -467,7 +478,7 @@ export default function OrderPage() {
               <div key={index} className={styles.loading_block}>
                 <div className={styles.place_block}>
                   <div className={styles.city_block}>
-                    <img src={point_icon} alt="Населённый пункт" className={icon_styles.add_order_icon} />
+                    <img src={point_icon} alt='Населённый пункт' className={icon_styles.add_order_icon} />
                     <City
                       value={block.city}
                       onChange={(value) => handleBlockChange(index, 'city', value)} />
@@ -480,7 +491,7 @@ export default function OrderPage() {
                   />
                 </div>
                 <div className={styles.phone_block}>
-                  <img src={phone_icon} alt="Телефон" className={icon_styles.add_order_icon} />
+                  <img src={phone_icon} alt='Телефон' className={icon_styles.add_order_icon} />
                   <div className={styles.phone_input}>
                     <PhoneInput
                       inputClass={input_styles.phone_input}
@@ -491,7 +502,7 @@ export default function OrderPage() {
                       value={block.phone}
                       onChange={(phone) => handleBlockChange(index, 'phone', phone)}
                       countryCodeEditable={false}
-                      placeholder={"+7 (999) 999-99-99"}
+                      placeholder={'+7 (999) 999-99-99'}
                       containerStyle={containerStyle}
                       buttonStyle={buttonStyle}
                       inputStyle={inputStyle}
@@ -517,20 +528,20 @@ export default function OrderPage() {
               <p>Разгрузка</p>
               <div className={styles.place_block}>
                 <div className={styles.city_block}>
-                  <img src={point_icon} alt="Населённый пункт" className={icon_styles.title_icon} />
+                  <img src={point_icon} alt='Населённый пункт' className={icon_styles.title_icon} />
                   <City
                     value={onUnloadingCityValue}
                     onChange={handleUnloadingCityChange} />
                 </div>
                 <Address
-                  id="onUnloadingInput"
+                  id='onUnloadingInput'
                   value={onUnloadingValue}
                   onChange={handleInputChange2}
                   onClear={clearUnloadingInput}
                 />
               </div>
               <div className={styles.phone_block}>
-                <img src={phone_icon} alt="Телефон" className={icon_styles.add_order_icon} />
+                <img src={phone_icon} alt='Телефон' className={icon_styles.add_order_icon} />
                 <div className={styles.phone_input}>
                   <PhoneInput
                     inputClass={input_styles.phone_input}
@@ -541,7 +552,7 @@ export default function OrderPage() {
                     countryCodeEditable={false}
                     value={onUnloadingPhoneValue}
                     onChange={(phone) => setOnUnloadingPhoneValue(phone)}
-                    placeholder={"+7 (999) 999-99-99"}
+                    placeholder={'+7 (999) 999-99-99'}
                     containerStyle={containerStyle}
                     buttonStyle={buttonStyle}
                     inputStyle={inputStyle}
@@ -555,12 +566,12 @@ export default function OrderPage() {
               </div>
             </div>
             <VATDropdown
-              id="vat_type"
+              id='vat_type'
               value={vatValue}
               onChange={handleVATChange}
               options={[
-                { label: "c НДС", value: "с НДС" },
-                { label: "без НДС", value: "без НДС" }
+                { label: 'с НДС', value: 'с НДС' },
+                { label: 'без НДС', value: 'без НДС' }
               ]}
             />
           </div>
@@ -574,8 +585,8 @@ export default function OrderPage() {
               </div>
               <div className={styles.order_preview_element_info}>
                 {cargoValue ? <img src={cargo_icon} className={icon_styles.title_icon}></img> : <img src={cargo_icon} className={icon_styles.preview_order_icon}></img>}
-                <p style={{ color: cargoValue ? 'black' : 'var(--inactive-text-color)' }}>{cargoValue ? cargoValue : 'Нет данных'}{}</p>
-                {isChecked && <img src={temp_icon} alt="Температурный режим" className={icon_styles.title_icon} />}
+                <p style={{ color: cargoValue ? 'black' : 'var(--inactive-text-color)' }}>{cargoValue ? cargoValue : 'Нет данных'}</p>
+                {isChecked && <img src={temp_icon} alt='Температурный режим' className={icon_styles.title_icon} />}
               </div>
             </div>
 
@@ -666,9 +677,9 @@ export default function OrderPage() {
               </div>
               <div className={styles.order_preview_element_info}>
                 {distanceValue !== null ? (
-                  <img src={path_icon} className={icon_styles.title_icon} alt="Километраж" />
+                  <img src={path_icon} className={icon_styles.title_icon} alt='Километраж' />
                 ) : (
-                  <img src={path_icon} className={icon_styles.preview_order_icon} alt="Километраж" />
+                  <img src={path_icon} className={icon_styles.preview_order_icon} alt='Километраж' />
                 )}
                 <p style={{ color: distanceValue !== null ? 'black' : 'var(--inactive-text-color)' }}>
                   {distanceValue !== null ? (

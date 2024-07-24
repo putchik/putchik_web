@@ -1,10 +1,11 @@
-import Order  from '../components/Orders/OrderModel';
+import Order from '../components/Orders/OrderModel';
 
 const fetchCreateOrder = async (
   cargoValue: string, cost: number, weightValue: number, amountValue: number, date: string,
   onLoadingCityValue: string, onLoadingValue: string, onLoadingPhoneValue: string,
   onUnloadingCityValue: string, onUnloadingValue: string, onUnloadingPhoneValue: string,
-  temperatureCondition: boolean, distanceValue: number
+  temperatureCondition: boolean, distanceValue: number,
+  additionalLoadingPoints: { locality: string, address: string, phone: string }[]
 ): Promise<Order> => {
   try {
     const requestBody = {
@@ -20,7 +21,7 @@ const fetchCreateOrder = async (
         locality: onLoadingCityValue,
         address: onLoadingValue,
         phone: onLoadingPhoneValue
-      }],
+      }, ...additionalLoadingPoints],
       unloading_points: [{
         locality: onUnloadingCityValue,
         address: onUnloadingValue,
@@ -47,7 +48,7 @@ const fetchCreateOrder = async (
       console.error('Error response:', errorData);
       throw new Error('Network response was not ok');
     }
-    const data = await response.json();
+    const data: Order = await response.json();
     return data;
   } catch (error) {
     console.error('Error in request:', error);
