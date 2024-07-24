@@ -53,7 +53,9 @@ const Header = () => {
     useEffect(() => {
         let username = localStorage.getItem('username');
 
-        if (localStorage.getItem('admin') === 'admin') {
+        if (localStorage.getItem('token') == undefined) {
+            return;
+        } else if (localStorage.getItem('admin') === 'admin') {
             setUsername('admin');
             localStorage.setItem('username', 'admin');
         } else if (username == undefined) {
