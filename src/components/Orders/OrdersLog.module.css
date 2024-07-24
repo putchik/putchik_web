@@ -132,6 +132,7 @@
     font-size: var(--font-size-main-and-input-text);
     display: flex;
     flex-direction: row;
+    align-items: center;
     padding: 8px 10px;
     color: white;
     border-radius: var(--border-radius-m);
