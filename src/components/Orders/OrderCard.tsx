@@ -14,16 +14,17 @@ import RedBox from "./RedBox";
 import Order from "./OrderModel";
 import OrderStatus from "./OrderStatus";
 import formatDate from "../dateFormatter";
+import { ORDER_PAGE } from '../../router/paths';
 
 const OrderCard = (props: { order: Order }) => {
   const navigate = useNavigate();
 
   const handleEditOrder = () => {
-    navigate('/order', { state: { order: props.order, mode: 'edit' } });
+    navigate(ORDER_PAGE, { state: { order: props.order, mode: 'edit' } });
   };
 
   const handleRepeatOrder = () => {
-    navigate('/order', { state: { order: props.order, mode: 'repeat' } });
+    navigate(ORDER_PAGE, { state: { order: props.order, mode: 'repeat' } });
   };
 
   const distanceInKm = Math.floor(props.order.distance / 1000);

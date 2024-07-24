@@ -1,13 +1,14 @@
-import Order  from '../components/Orders/OrderModel';
+import Order from '../components/Orders/OrderModel';
 
-const fetchCreateOrder = async (
-  cargoValue: string, cost: number, weightValue: number, amountValue: number, date: string,
+const fetchUpdateOrder = async (
+  id: number, cargoValue: string, cost: number, weightValue: number, amountValue: number, date: string,
   onLoadingCityValue: string, onLoadingValue: string, onLoadingPhoneValue: string,
   onUnloadingCityValue: string, onUnloadingValue: string, onUnloadingPhoneValue: string,
-  temperatureCondition: boolean, distanceValue: number
+  temperatureCondition: boolean, status: string, distanceValue: number
 ): Promise<Order> => {
   try {
     const requestBody = {
+      id: id,
       cargo: cargoValue,
       cost: cost,
       weight: weightValue,
@@ -15,7 +16,7 @@ const fetchCreateOrder = async (
       loading_time: date,
       distance: distanceValue,
       temperature_condition: temperatureCondition,
-      status: 'new',
+      status: status,
       loading_points: [{
         locality: onLoadingCityValue,
         address: onLoadingValue,
@@ -36,8 +37,8 @@ const fetchCreateOrder = async (
       headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/order/create_order`, {
-      method: 'POST',
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/order`, {
+      method: 'PUT',
       headers: headers,
       body: JSON.stringify(requestBody)
     });
@@ -55,4 +56,4 @@ const fetchCreateOrder = async (
   }
 }
 
-export default fetchCreateOrder;
+export default fetchUpdateOrder;

@@ -27,8 +27,6 @@ const OrdersPage = () => {
                     setUsersWithOrders(data.users);
                 })
         }
-
-
     }, [])
 
     useEffect(() => {
@@ -46,7 +44,7 @@ const OrdersPage = () => {
             }
         }
     }, [location.state]);
-    
+
     return (
         <div className={styles.page}>
             <Header />
