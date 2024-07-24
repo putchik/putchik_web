@@ -43,17 +43,16 @@ const OrderCard = (props: { order: Order }) => {
             <OrderStatus status={props.order.status} />
           </div>
 
-                    <div className={cn(container_styles.flex_row, container_styles.gap_10)} style={{ maxWidth: 500, flexWrap: 'wrap' }}>
-                        <RedBox startImgSrc={path} text={`${props.order.distance.toString()} км`} done={props.order.status == "Delivered"} />
-                        <RedBox startImgSrc={volume} text={`${props.order.amount} м³`} done={props.order.status == "Delivered"} />
-                        <RedBox startImgSrc={weight} text={`${props.order.weight} кг`} done={props.order.status == "Delivered"} />
-                        <RedBox startImgSrc={cargo} endImgSrc={temp} text={props.order.cargo} done={props.order.status == "Delivered"} />
-                    </div>
           <div className={cn(container_styles.flex_row, container_styles.gap_10)} style={{ maxWidth: 500, flexWrap: 'wrap' }}>
             <RedBox startImgSrc={path} text={`${distanceInKm} км`} done={props.order.status === "Delivered"} />
             <RedBox startImgSrc={volume} text={`${props.order.amount} м³`} done={props.order.status === "Delivered"} />
             <RedBox startImgSrc={weight} text={`${props.order.weight} кг`} done={props.order.status === "Delivered"} />
-            <RedBox startImgSrc={cargo} text={props.order.cargo} done={props.order.status === "Delivered"} />
+            <RedBox 
+              startImgSrc={cargo} 
+              endImgSrc={props.order.temperature_condition ? temp : undefined} 
+              text={props.order.cargo} 
+              done={props.order.status === "Delivered"} 
+            />
           </div>
 
           <div className={styles.pathContainer}>
