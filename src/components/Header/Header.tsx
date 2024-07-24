@@ -14,7 +14,6 @@ import Button from "../../UI/Button/Button";
 import { ButtonThemes } from "../../UI/Button/ButtonTypes";
 import { useEffect, useRef, useState } from "react";
 import fetchGetUserProfile from "../../fetch_functions/fetchGetUserProfile";
-import { UserInfo } from "../Profile/Profile";
 import { ProfileResponse } from "../../pages/ProfilePage/ProfilePage";
 
 const Header = () => {

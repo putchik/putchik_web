@@ -1,13 +1,18 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./OrdersPage.module.css";
 import Header from "../../components/Header/Header";
 import Order, { OrderResponse, UsersWithOrders, UserWithOrders } from "../../components/Orders/OrderModel";
 import OrdersLog from "../../components/Orders/OrdersLog";
-import { useEffect, useState } from "react";
 import fetchGetUserOrders from "../../fetch_functions/fetchGetUserOrders";
 import fetchGetAllUsersOrders from "../../fetch_functions/fetchGetAllUsersOrders";
 import AdminOrdersLog from "../../components/Admin/AdminOrdersLog";
 
 const OrdersPage = () => {
+    const [ordersList, setOrdersList] = useState<Order[]>([]);
+    const [usersWithOrders, setUsersWithOrders] = useState<UserWithOrders[]>([]);
+    const location = useLocation();
+
     useEffect(() => {
         if (localStorage.getItem('admin') == undefined) {
             fetchGetUserOrders()
@@ -22,68 +27,26 @@ const OrdersPage = () => {
                     setUsersWithOrders(data.users);
                 })
         }
+
+
     }, [])
 
-    const [ordersList, setOrdersList] = useState<Order[]>([]);
-    const [usersWithOrders, setUsersWithOrders] = useState<UserWithOrders[]>([]);
+    useEffect(() => {
+        if (location.state) {
+            const newOrder = location.state.newOrder as Order;
+            const updatedOrder = location.state.updatedOrder as Order;
 
-    // const ordersList: Order[] = [
-    //     {
-    //         id: 1,
-    //         readable_id: "#FW21244",
-    //         customer_id: 1,
-    //         cargo: "Чемоданы",
-    //         created_at: "2024-07-14T10:51:39.533Z",
-    //         cost: 15000,
-    //         distance: 1220,
-    //         weight: 5,
-    //         amount: 2,
-    //         temperature_condition: true,
-    //         status: "Transit",
-    //         loading_points: [
-    //             {
-    //                 locality: "Москва",
-    //                 address: "Невский проспект 1",
-    //                 phone: "+79999999999"
-    //             }
-    //         ],
-    //         unloading_points: [
-    //             {
-    //                 locality: "Санкт-Петербург",
-    //                 address: "Невский проспект 1",
-    //                 phone: "+79999999999"
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         id: 1,
-    //         readable_id: "#FW21245",
-    //         customer_id: 1,
-    //         cargo: "Чемоданы",
-    //         created_at: "2024-07-14T10:51:39.533Z",
-    //         cost: 15000,
-    //         distance: 1220,
-    //         weight: 5,
-    //         amount: 2,
-    //         temperature_condition: true,
-    //         status: "done",
-    //         loading_points: [
-    //             {
-    //                 locality: "Москва",
-    //                 address: "Невский проспект 1",
-    //                 phone: "+79999999999"
-    //             }
-    //         ],
-    //         unloading_points: [
-    //             {
-    //                 locality: "Санкт-Петербург",
-    //                 address: "Невский проспект 1",
-    //                 phone: "+79999999999"
-    //             }
-    //         ]
-    //     }
-    // ]
-
+            if (newOrder) {
+                setOrdersList(prevOrders => [...prevOrders, newOrder]);
+            }
+            if (updatedOrder) {
+                setOrdersList(prevOrders =>
+                    prevOrders.map(order => (order.id === updatedOrder.id ? updatedOrder : order))
+                );
+            }
+        }
+    }, [location.state]);
+    
     return (
         <div className={styles.page}>
             <Header />

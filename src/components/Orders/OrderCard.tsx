@@ -13,11 +13,19 @@ import RedBox from "./RedBox";
 import Order from "./OrderModel";
 import OrderStatus from "./OrderStatus";
 import formatDate from "../dateFormatter";
+import { useNavigate } from "react-router-dom";
 
 const OrderCard = (props: { order: Order }) => {
+    const navigate = useNavigate();
+    const handleEditOrder = () => {
+        navigate('/order', { state: { order: props.order, mode: 'edit' } });
+    };
+    const handleRepeatOrder = () => {
+        navigate('/order', { state: { order: props.order, mode: 'repeat' } });
+    };
     return (
         <div className={styles.centeredFrameSmall}>
-            <div className={styles.infoAndPriceContainer}>
+            <div className={styles.infoAndPriceContainer} onClick={handleEditOrder}>
                 <div className={cn(container_styles.flex_col, container_styles.gap_20)} style={{ maxWidth: 'none' }} >
                     <div className={styles.cardHeaderContainer}>
                         <div className={cn(container_styles.flex_row, container_styles.gap_20)}>
@@ -56,7 +64,7 @@ const OrderCard = (props: { order: Order }) => {
                         <div className="hint">с НДС</div>
                     </div>
 
-                    <div className={styles.redText}>Повторить</div>
+                    <div className={styles.redText} onClick={(e) => { e.stopPropagation(); handleRepeatOrder(); }}>Повторить</div>
                 </div>
             </div>
         </div>
