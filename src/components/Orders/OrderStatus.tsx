@@ -7,7 +7,7 @@ import Line from "../../assets/icons/Line.svg";
 
 import cn from "classnames";
 
-const OrderStatus = (props: { status: string }) => {
+const OrderStatusElement = (props: { status: string }) => {
     return (
         // "Created" | "Transit" | "Delivered"
         <div className={styles.orderStatusContainer}>
@@ -21,4 +21,4 @@ const OrderStatus = (props: { status: string }) => {
     )
 }
 
-export default OrderStatus;
+export default OrderStatusElement;
