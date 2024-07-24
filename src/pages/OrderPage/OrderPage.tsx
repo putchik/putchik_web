@@ -18,7 +18,8 @@ import Input from '../../UI/Input/Input';
 import Header from '../../components/Header/Header';
 
 import fetchGetDistance from '../../fetch_functions/fetchGetDistance';
-import fetchOrderDetails from '../../fetch_functions/fetchCreateOrder';
+import fetchCreateOrder from '../../fetch_functions/fetchCreateOrder';
+import fetchUpdateOrder from '../../fetch_functions/fetchUpdateOrder';
 
 import { buttonStyle, containerStyle, inputStyle } from '../../components/PhoneInputStyling';
 
@@ -43,7 +44,7 @@ import container_styles from '../../UI/containers.module.css';
 import { ButtonThemes } from '../../UI/Button/ButtonTypes';
 import { InputThemes } from '../../UI/Input/InputTypes';
 
-import Order, { OrderStatus } from '../../components/Orders/OrderModel'; // Импортируем типы и интерфейсы
+import Order from '../../components/Orders/OrderModel'; // Импортируем типы и интерфейсы
 
 dayjs.extend(customParseFormat);
 
@@ -60,7 +61,7 @@ export default function OrderPage() {
   const [onUnloadingPhoneValue, setOnUnloadingPhoneValue] = useState<string>('');
   const [onLoadingValue, setOnLoadingValue] = useState<string>('');
   const [onUnloadingValue, setOnUnloadingValue] = useState<string>('');
-  const [selectedUnit, setSelectedUnit] = useState<string>('');
+  const [selectedUnit, setSelectedUnit] = useState<string>('кг');
   const [onLoadingCityValue, setOnLoadingCityValue] = useState<string>('');
   const [onUnloadingCityValue, setUnloadingCityValue] = useState<string>('');
   const [date, setDate] = useState<string>('');
@@ -75,7 +76,7 @@ export default function OrderPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const mode = location.state?.mode || 'create'; // 'edit', 'repeat', or 'create'
+  const mode = location.state?.mode || 'create';
 
   useEffect(() => {
     if (mode === 'edit' || mode === 'repeat') {
@@ -148,43 +149,32 @@ export default function OrderPage() {
   const fetchOrderDetailsCallback = useCallback(async () => {
     if (onLoadingCityValue && onLoadingValue && onUnloadingCityValue && onUnloadingValue) {
       try {
-        console.log('Значения перед запросом:', {
-          cargoValue,
-          weightValue,
-          amountValue,
-          date,
-          time,
-          onLoadingCityValue,
-          onLoadingValue,
-          onLoadingPhoneValue,
-          onUnloadingCityValue,
-          onUnloadingValue,
-          onUnloadingPhoneValue,
-          isChecked
-        });
-
         const isoDateString = getISODateString(date, time);
-        console.log('ISO date string:', isoDateString);
-
         const adjustedWeight = selectedUnit === 'т' ? weightValue! * 1000 : weightValue!;
 
-        const orderDetails = await fetchOrderDetails(
-          cargoValue, adjustedWeight, amountValue!, isoDateString,
-          onLoadingCityValue, onLoadingValue, onLoadingPhoneValue,
-          onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue,
-          isChecked
-        );
-
-        console.log('Данные о заказе:', orderDetails);
-        const completeOrder: Order = {
-          ...orderDetails,
-          id: orderDetails.id || Date.now(),
-          customer_id: orderDetails.customer_id || 1,
-          temperature_condition: orderDetails.temperature_condition ?? isChecked,
-          status: orderDetails.status as OrderStatus,
-          distance: distanceValue! * 1000,
-        };
-        return completeOrder;
+        if (mode === 'create' || mode === 'repeat') {
+          const orderDetails = await fetchCreateOrder(
+            cargoValue, 10000, adjustedWeight, amountValue!, isoDateString,
+            onLoadingCityValue, onLoadingValue, onLoadingPhoneValue,
+            onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue,
+            isChecked, distanceValue!
+          );
+          console.log('Данные о созданном заказе:', orderDetails);
+          return orderDetails;
+        } else {
+          const id = location.state?.order?.id ?? 0;
+          const statusValue = location.state?.order?.status ?? 'new';
+  
+          const orderDetails = await fetchUpdateOrder(
+            id, cargoValue, 10000, adjustedWeight, amountValue!, isoDateString,
+            onLoadingCityValue, onLoadingValue, onLoadingPhoneValue,
+            onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue,
+            isChecked, statusValue, distanceValue!
+          );
+  
+          console.log('Данные о заказе:', orderDetails);
+          return orderDetails;
+        }
       } catch (error) {
         console.error('Ошибка при получении данных о заказе:', error);
         return null;
@@ -194,7 +184,7 @@ export default function OrderPage() {
   }, [
     cargoValue, weightValue, amountValue, date, time,
     onLoadingCityValue, onLoadingValue, onLoadingPhoneValue,
-    onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue, isChecked, selectedUnit, distanceValue
+    onUnloadingCityValue, onUnloadingValue, onUnloadingPhoneValue, isChecked, selectedUnit, distanceValue, location.state, mode
   ]);
 
   const getISODateString = (date: string, time: string) => {
@@ -345,7 +335,7 @@ export default function OrderPage() {
 
   return (
     <div className={styles.page}>
-      <Header></Header>
+      <Header />
 
       <div className={styles.order_page}>
         <div className={styles.order_block}>
@@ -371,7 +361,13 @@ export default function OrderPage() {
                     onChange={setWeightNumberValue}
                     maxLength={4}
                     className={input_styles.weight_amount_vat_input}
-                    placeholder='Вес' />
+                    placeholder='Вес'
+                    list="weight_units"
+                  />
+                  <datalist id="weight_units">
+                    <option value="кг" />
+                    <option value="т" />
+                  </datalist>
                 </div>
                 <Dropdown
                   id="weight_type"

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styles from "./OrdersLog.module.css";
 import container_styles from '../../UI/containers.module.css';
 import calendar from '../../assets/icons/Calendar.svg';
@@ -13,7 +14,7 @@ import RedBox from "./RedBox";
 import Order, { OrderStatus } from "./OrderModel";
 import OrderStatusElement from "./OrderStatus";
 import formatDate from "../dateFormatter";
-import { useNavigate } from "react-router-dom";
+import { ORDER_PAGE } from '../../router/paths';
 import formatPrice from "../priceFormatter";
 import Button from "../../UI/Button/Button";
 import { ButtonThemes } from "../../UI/Button/ButtonTypes";
@@ -24,15 +25,17 @@ import Dropdown from "../OrderInputs/WeightDropdown";
 import fetchPostAdminOrder from "../../fetch_functions/fetchPostAdminOrder";
 
 const OrderCard = (props: { order: Order }) => {
-    const navigate = useNavigate();
-    const handleEditOrder = () => {
-        if (localStorage.getItem('token') == undefined) {
-            navigate('/order', { state: { order: props.order, mode: 'edit' } });
+  const navigate = useNavigate();
+
+  const handleEditOrder = () => {
+        if (localStorage.getItem('admin') == undefined) {
+        navigate(ORDER_PAGE, { state: { order: props.order, mode: 'edit' } });
         }
-    };
-    const handleRepeatOrder = () => {
-        navigate('/order', { state: { order: props.order, mode: 'repeat' } });
-    };
+  };
+
+  const handleRepeatOrder = () => {
+    navigate(ORDER_PAGE, { state: { order: props.order, mode: 'repeat' } });
+  };
 
     const [adminPrice, setAdminPrice] = useState<string>(props.order.cost.toString())
     const [adminStatus, setAdminStatus] = useState<string>(props.order.status)
@@ -44,40 +47,48 @@ const OrderCard = (props: { order: Order }) => {
         }));
     };
 
-    return (
-        <div className={styles.centeredFrameSmall}>
-            <div className={styles.infoAndPriceContainer} onClick={handleEditOrder}>
-                <div className={cn(container_styles.flex_col, container_styles.gap_20)} style={{ maxWidth: 'none' }} >
-                    <div className={styles.cardHeaderContainer}>
-                        <div className={cn(container_styles.flex_row, container_styles.gap_20)}>
-                            <h3>{props.order.readable_id}</h3>
-                            <div className={cn(styles.text, styles.date)} >
-                                <img className={styles.calendarImage} src={calendar} />
-                                {formatDate(props.order.created_at)}
-                            </div>
-                        </div>
-                        <OrderStatusElement status={props.order.status} />
-                    </div>
 
-                    <div className={cn(container_styles.flex_row, container_styles.gap_10)} style={{ maxWidth: 500, flexWrap: 'wrap' }}>
-                        <RedBox startImgSrc={path} text={`${props.order.distance.toString()} км`} done={props.order.status == "Delivered"} />
-                        <RedBox startImgSrc={volume} text={`${props.order.amount} м³`} done={props.order.status == "Delivered"} />
-                        <RedBox startImgSrc={weight} text={`${props.order.weight} кг`} done={props.order.status == "Delivered"} />
-                        <RedBox startImgSrc={cargo} endImgSrc={temp} text={props.order.cargo} done={props.order.status == "Delivered"} />
-                    </div>
+  const distanceInKm = Math.floor(props.order.distance / 1000);
 
-                    <div className={styles.pathContainer}>
-                        <div>
-                            <div style={{ fontWeight: 500, fontSize: '15px', lineHeight: '17px' }}>{props.order.loading_points[0].locality}</div>
-                            <div className="hint" style={{ wordBreak: 'break-word' }}>{props.order.loading_points[0].address}</div>
-                        </div>
-                        <img src={pathArrow} className={styles.arrowImage} />
-                        <div>
-                            <div style={{ fontWeight: 500, fontSize: '15px', lineHeight: '17px' }}>{props.order.unloading_points[0].locality}</div>
-                            <div className="hint" style={{ wordBreak: 'break-word' }}>{props.order.unloading_points[0].address}</div>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <div className={styles.centeredFrameSmall}>
+      <div className={styles.infoAndPriceContainer} onClick={handleEditOrder}>
+        <div className={cn(container_styles.flex_col, container_styles.gap_20)} style={{ maxWidth: 'none' }} >
+          <div className={styles.cardHeaderContainer}>
+            <div className={cn(container_styles.flex_row, container_styles.gap_20)}>
+              <h3>{props.order.readable_id}</h3>
+              <div className={cn(styles.text, styles.date)} >
+                <img className={styles.calendarImage} src={calendar} />
+                {formatDate(props.order.created_at)}
+              </div>
+            </div>
+            <OrderStatusElement status={props.order.status} />
+          </div>
+
+          <div className={cn(container_styles.flex_row, container_styles.gap_10)} style={{ maxWidth: 500, flexWrap: 'wrap' }}>
+            <RedBox startImgSrc={path} text={`${distanceInKm} км`} done={props.order.status === "Delivered"} />
+            <RedBox startImgSrc={volume} text={`${props.order.amount} м³`} done={props.order.status === "Delivered"} />
+            <RedBox startImgSrc={weight} text={`${props.order.weight} кг`} done={props.order.status === "Delivered"} />
+            <RedBox 
+              startImgSrc={cargo} 
+              endImgSrc={props.order.temperature_condition ? temp : undefined} 
+              text={props.order.cargo} 
+              done={props.order.status === "Delivered"} 
+            />
+          </div>
+
+          <div className={styles.pathContainer}>
+            <div>
+              <div style={{ fontWeight: 500, fontSize: '15px', lineHeight: '17px' }}>{props.order.loading_points[0].locality}</div>
+              <div className="hint" style={{ wordBreak: 'break-word' }}>{props.order.loading_points[0].address}</div>
+            </div>
+            <img src={pathArrow} className={styles.arrowImage} />
+            <div>
+              <div style={{ fontWeight: 500, fontSize: '15px', lineHeight: '17px' }}>{props.order.unloading_points[0].locality}</div>
+              <div className="hint" style={{ wordBreak: 'break-word' }}>{props.order.unloading_points[0].address}</div>
+            </div>
+          </div>
+        </div>
 
                 {localStorage.getItem('admin') == undefined
                     ?
