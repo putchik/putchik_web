@@ -5,4 +5,5 @@ export const ORDER_PAGE = "/order"
 export const MAIN_PAGE = "/main"
 export const ORDERS_PAGE = "/orders";
 export const PROFILE_PAGE = "/profile";
+export const ADMIN_AUTH_PAGE = "/admin_auth";
 

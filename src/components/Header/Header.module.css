@@ -88,6 +88,7 @@
     .support {
         margin-right: auto;
     }
+
     .sectionContainer {
         display: flex;
         row-gap: var(--spacing-m);
@@ -136,6 +137,7 @@
 .profile {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: var(--spacing-s);
     cursor: pointer;
 }
@@ -144,6 +146,13 @@
     .profile {
         cursor: default;
     }
+}
+
+.profile h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
 }
 
 .profile img {

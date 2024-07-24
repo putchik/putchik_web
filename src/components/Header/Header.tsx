@@ -14,7 +14,7 @@ import Button from "../../UI/Button/Button";
 import { ButtonThemes } from "../../UI/Button/ButtonTypes";
 import { useEffect, useRef, useState } from "react";
 import fetchGetUserProfile from "../../fetch_functions/fetchGetUserProfile";
-import { UserInfo } from "../Profile/Profile";
+import { ProfileResponse } from "../../pages/ProfilePage/ProfilePage";
 
 const Header = () => {
     const poputchik_email: string = "poputchik@poputchik.ru";
@@ -37,7 +37,9 @@ const Header = () => {
     }
 
     const handleExitClick = () => {
-        window.localStorage.removeItem('token');
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('admin');
         window.location.href = AUTH_PAGE;
     }
 
@@ -50,11 +52,17 @@ const Header = () => {
 
     useEffect(() => {
         let username = localStorage.getItem('username');
-        if (username == undefined) {
+
+        if (localStorage.getItem('admin') === 'admin') {
+            setUsername('admin');
+            localStorage.setItem('username', 'admin');
+        } else if (username == undefined) {
             fetchGetUserProfile()
-                .then((data: UserInfo) => {
-                    setUsername(data.is_organization_account ? data.organization : data.name);
-                    localStorage.setItem('username', data.is_organization_account ? data.organization : data.name);
+                .then((data: ProfileResponse) => {
+                    console.log(data);
+                    let data_name = data.is_organization_account ? data.organization?.organization_name : data.name;
+                    setUsername(data_name ? data_name : '');
+                    localStorage.setItem('username', data_name ? data_name : '');
                 })
         } else {
             setUsername(username);
@@ -108,10 +116,11 @@ const Header = () => {
                     openEvents={{ ['click']: true }}
                     closeEvents={{ ['click']: true }}
                 >
-                    <Button buttonTheme={ButtonThemes.RED_FILLED} className={cn(styles.littleRow, styles.red)} onClick={handleGoToProfilePageClick}>
-                        <img src={Profile} />
-                        Личный кабинет
-                    </Button>
+                    {localStorage.getItem('admin') == undefined &&
+                        <Button buttonTheme={ButtonThemes.RED_FILLED} className={cn(styles.littleRow, styles.red)} onClick={handleGoToProfilePageClick}>
+                            <img src={Profile} />
+                            Личный кабинет
+                        </Button>}
                     <Button buttonTheme={ButtonThemes.RED} className={cn(styles.littleRow, styles.redText)} onClick={handleExitClick}>
                         <img src={Exit} />
                         Выйти из аккаунта
@@ -159,10 +168,11 @@ const Header = () => {
                             <h3>{username}</h3>
                         </div>
                         <div>
-                            <Button buttonTheme={ButtonThemes.RED} className={cn(styles.littleRow, styles.redText)} onClick={handleGoToProfilePageClick}>
-                                <img src={Profile} />
-                                Личный кабинет
-                            </Button>
+                            {localStorage.getItem('admin') == undefined &&
+                                <Button buttonTheme={ButtonThemes.RED} className={cn(styles.littleRow, styles.redText)} onClick={handleGoToProfilePageClick}>
+                                    <img src={Profile} />
+                                    Личный кабинет
+                                </Button>}
                             <Button buttonTheme={ButtonThemes.RED} className={cn(styles.littleRow, styles.redText)} onClick={handleExitClick}>
                                 <img src={Exit} />
                                 Выйти из аккаунта

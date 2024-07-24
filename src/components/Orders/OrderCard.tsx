@@ -7,12 +7,14 @@ import volume from '../../assets/icons/Volume.svg';
 import weight from '../../assets/icons/Weight.svg';
 import cargo from '../../assets/icons/Cargo.svg';
 import pathArrow from '../../assets/icons/Path_arrow.svg';
+import temp from '../../assets/icons/Temp_regime.svg';
 
 import cn from "classnames";
 import RedBox from "./RedBox";
 import Order from "./OrderModel";
 import OrderStatus from "./OrderStatus";
 import formatDate from "../dateFormatter";
+import { useNavigate } from "react-router-dom";
 
 const OrderCard = (props: { order: Order }) => {
   const navigate = useNavigate();
@@ -42,6 +44,12 @@ const OrderCard = (props: { order: Order }) => {
             <OrderStatus status={props.order.status} />
           </div>
 
+                    <div className={cn(container_styles.flex_row, container_styles.gap_10)} style={{ maxWidth: 500, flexWrap: 'wrap' }}>
+                        <RedBox startImgSrc={path} text={`${props.order.distance.toString()} км`} done={props.order.status == "Delivered"} />
+                        <RedBox startImgSrc={volume} text={`${props.order.amount} м³`} done={props.order.status == "Delivered"} />
+                        <RedBox startImgSrc={weight} text={`${props.order.weight} кг`} done={props.order.status == "Delivered"} />
+                        <RedBox startImgSrc={cargo} endImgSrc={temp} text={props.order.cargo} done={props.order.status == "Delivered"} />
+                    </div>
           <div className={cn(container_styles.flex_row, container_styles.gap_10)} style={{ maxWidth: 500, flexWrap: 'wrap' }}>
             <RedBox startImgSrc={path} text={`${distanceInKm} км`} done={props.order.status === "Delivered"} />
             <RedBox startImgSrc={volume} text={`${props.order.amount} м³`} done={props.order.status === "Delivered"} />

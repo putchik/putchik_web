@@ -4,22 +4,21 @@ import Profile, { UserInfo } from "../../components/Profile/Profile";
 import { useEffect, useState } from "react";
 import fetchGetUserProfile from "../../fetch_functions/fetchGetUserProfile";
 
+export interface ProfileResponse {
+    id: number,
+    name: string,
+    is_organization_account: boolean,
+    email: string,
+    organization: null | {
+        id: number,
+        organization_name: string,
+        inn: number,
+    },
+    inn: string,
+    phone: string,
+}
 
 const ProfilePage = () => {
-    interface ProfileResponse {
-        id: number,
-        name: string,
-        is_organization_account: boolean,
-        email: string,
-        organization: null | {
-            id: number,
-            organization_name: string,
-            inn: number,
-        },
-        inn: string,
-        phone: string,
-    }
-
     const [userInfo, setUserInfo] = useState<UserInfo>(
         {
             id: 0,
